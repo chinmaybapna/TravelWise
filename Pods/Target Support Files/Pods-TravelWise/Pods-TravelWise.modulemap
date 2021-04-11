@@ -1,0 +1,6 @@
+framework module Pods_TravelWise {
+  umbrella header "Pods-TravelWise-umbrella.h"
+
+  export *
+  module * { export * }
+}
