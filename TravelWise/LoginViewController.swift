@@ -10,6 +10,8 @@ import Firebase
 
 class LoginViewController: UIViewController {
     
+    let db = Firestore.firestore()
+    
     @IBOutlet weak var emailTextField: UITextField!  {
         didSet {
             let blackPlaceholderText = NSAttributedString(string: "Email",
@@ -31,11 +33,11 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var containerView: UIView!
     
     let attributes: [NSAttributedString.Key: Any] = [
-          .font: UIFont.systemFont(ofSize: 14),
-          .foregroundColor: UIColor.black,
-          .underlineStyle: NSUnderlineStyle.single.rawValue
-      ]
-
+        .font: UIFont.systemFont(ofSize: 14),
+        .foregroundColor: UIColor.black,
+        .underlineStyle: NSUnderlineStyle.single.rawValue
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,8 +58,8 @@ class LoginViewController: UIViewController {
         
         nextButton.layer.cornerRadius = 5
         let attributeString = NSMutableAttributedString(
-                string: "New to TravelWise? Register now",
-                attributes: attributes
+            string: "New to TravelWise? Register now",
+            attributes: attributes
         )
         registerButton.setAttributedTitle(attributeString, for: .normal)
         
@@ -71,18 +73,35 @@ class LoginViewController: UIViewController {
     
     @IBAction func nextButtonTapped(_ sender: Any) {
         if let email = emailTextField.text, let password = passwordTextField.text {
-            Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
-                guard self != nil else { return }
-                if error != nil {
-                    print("login failed.")
+            db.collection("registeredEmails").whereField("email", isEqualTo: email).getDocuments(completion: { (querySnapshot, error) in
+                if querySnapshot!.documents.count == 0 {
+                    let alert = UIAlertController(title: "Account does not exist", message: "", preferredStyle: .alert)
+                    let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alert.addAction(action)
+                    self.present(alert, animated: true, completion: nil)
                 }
                 else {
-                    print("success in logging in the user.")
+                    if self.emailTextField.text == "" || self.passwordTextField.text == "" {
+                        let alert = UIAlertController(title: "Fields can't be empty", message: "", preferredStyle: .alert)
+                        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+                        alert.addAction(action)
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                    else {
+                        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+                            guard self != nil else { return }
+                            if error != nil {
+                                print("login failed.")
+                            }
+                            else {
+                                print("success in logging in the user.")
+                            }
+                        }
+                    }
                 }
-            }
+            })
         }
     }
-    
 }
 
 extension UITextField {

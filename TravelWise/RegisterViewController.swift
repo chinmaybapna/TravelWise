@@ -9,6 +9,9 @@ import UIKit
 import Firebase
 
 class RegisterViewController: UIViewController {
+    
+    let db = Firestore.firestore()
+    
     @IBOutlet weak var emailTextField: UITextField!  {
         didSet {
             let blackPlaceholderText = NSAttributedString(string: "Email",
@@ -58,14 +61,36 @@ class RegisterViewController: UIViewController {
     
     @IBAction func nextButtonTapped(_ sender: Any) {
         if let email = emailTextField.text, let password = passwordTextField.text {
-            Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-                if error != nil {
-                    print("registration failed.")
+            db.collection("registeredEmails").whereField("email", isEqualTo: email).getDocuments(completion: { (querySnapshot, error) in
+                if querySnapshot!.documents.count > 0 {
+                    let alert = UIAlertController(title: "Email already in use", message: "", preferredStyle: .alert)
+                    let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alert.addAction(action)
+                    self.present(alert, animated: true, completion: nil)
                 }
                 else {
-                    print("success in creating the user.")
+                    if email == "" || password == "" {
+                        let alert = UIAlertController(title: "Fields can't be empty", message: "", preferredStyle: .alert)
+                        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+                        alert.addAction(action)
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                    else {
+//                        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+//                            if error != nil {
+//                                print("registration failed.")
+//                            }
+//                            else {
+//                                print("success in creating the user.")
+//                            }
+//                        }
+                        UserDefaults.standard.setValue(email, forKey: "email")
+                        UserDefaults.standard.setValue(password, forKey: "password")
+                        
+                        self.performSegue(withIdentifier: "registration_details", sender: nil)
+                    }
                 }
-            }
+            })
         }
     }
 }
