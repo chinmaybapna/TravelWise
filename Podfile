@@ -8,4 +8,10 @@ target 'TravelWise' do
   # Pods for TravelWise
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
+  pod 'Firebase/Storage'
+  pod 'Alamofire'
+  pod 'SwiftyJSON'
+  pod 'SDWebImage'
+  pod 'FloatingPanel'
+  pod 'Cosmos'
 end
