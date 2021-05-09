@@ -84,7 +84,7 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                     self.tripProfileImageURL = data["tripProfileImageURL"] as! String
                     
                     self.tripNameLabel.text = self.tripName
-                    self.tripProfileImageView.sd_setImage(with: URL(string: ""), placeholderImage: UIImage(named: "Paris"))
+                    self.tripProfileImageView.sd_setImage(with: URL(string: ""), placeholderImage: UIImage(named: "rowan-heuvel-U6t80TWJ1DM-unsplash"))
                 }
                 
                 getPlacesVisited()
