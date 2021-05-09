@@ -14,4 +14,5 @@ target 'TravelWise' do
   pod 'SDWebImage'
   pod 'FloatingPanel'
   pod 'Cosmos'
+  pod 'IQKeyboardManagerSwift'
 end

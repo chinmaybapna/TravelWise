@@ -9,9 +9,9 @@ import UIKit
 import Cosmos
 
 class ContentViewController: UIViewController, UITextViewDelegate {
-
-    @IBOutlet weak var descriptionTextView: UITextView!
     
+    @IBOutlet weak var descriptionTextView: UITextView!
+    @IBOutlet weak var addressLabel: UITextView!
     @IBOutlet weak var cosmosView: CosmosView!
     
     override func viewDidLoad() {

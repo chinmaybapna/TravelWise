@@ -312,11 +312,20 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pin-3" translatesAutoresizingMaskIntoConstraints="NO" id="sny-SS-69Q">
+                                <rect key="frame" x="187" y="428" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="68h-rT-s1T"/>
+                                    <constraint firstAttribute="height" constant="40" id="AHt-f8-OjO"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="15a-vb-RGF"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="sny-SS-69Q" firstAttribute="centerY" secondItem="2fD-2i-LV7" secondAttribute="centerY" id="0b1-0D-VYT"/>
                             <constraint firstItem="tOy-lf-qfR" firstAttribute="top" secondItem="15a-vb-RGF" secondAttribute="top" id="D3R-Gi-PId"/>
+                            <constraint firstItem="sny-SS-69Q" firstAttribute="centerX" secondItem="2fD-2i-LV7" secondAttribute="centerX" id="MGj-uh-xFI"/>
                             <constraint firstItem="tOy-lf-qfR" firstAttribute="leading" secondItem="15a-vb-RGF" secondAttribute="leading" id="MoU-Hx-yMA"/>
                             <constraint firstItem="g5B-4I-ugY" firstAttribute="leading" secondItem="15a-vb-RGF" secondAttribute="leading" id="Wsl-ab-JXX"/>
                             <constraint firstItem="tOy-lf-qfR" firstAttribute="trailing" secondItem="15a-vb-RGF" secondAttribute="trailing" id="XDC-uc-erd"/>
@@ -325,7 +334,16 @@
                             <constraint firstItem="tOy-lf-qfR" firstAttribute="bottom" secondItem="15a-vb-RGF" secondAttribute="bottom" id="vnf-sq-2fp"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="ZOP-Hj-ZPE"/>
+                    <navigationItem key="navigationItem" id="ZOP-Hj-ZPE">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="N9f-KD-Tch">
+                            <connections>
+                                <action selector="doneButtonPressed:" destination="jLm-5Y-Lo2" id="CsX-YL-REe"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="tOy-lf-qfR" id="RZ6-Pb-9Ia"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aql-2l-tgQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -334,25 +352,26 @@
         <!--Content View Controller-->
         <scene sceneID="pHq-GO-lAk">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pj4-i8-hsC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="content_vc" id="Nmi-pd-Wud" customClass="ContentViewController" customModule="TravelWise" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xyB-hP-eou">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eiffel Tower" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8eh-n6-cQo">
-                                <rect key="frame" x="30" y="64" width="166.5" height="36"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
+                                <rect key="frame" x="30" y="69" width="153.5" height="35"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate this place" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cA2-gG-Lzm">
-                                <rect key="frame" x="30" y="135" width="354" height="20"/>
+                                <rect key="frame" x="30" y="134" width="354" height="20"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2p6-Mb-WUy">
-                                <rect key="frame" x="30" y="208" width="354" height="125"/>
+                                <rect key="frame" x="30" y="217" width="354" height="125"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="125" id="1kh-VU-acV"/>
@@ -362,8 +381,11 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gVu-Ev-IMb" customClass="CosmosView" customModule="Cosmos">
-                                <rect key="frame" x="30" y="163" width="354" height="20"/>
+                                <rect key="frame" x="30" y="162" width="354" height="20"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="VCX-46-ZeB"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="81q-31-flw"/>
@@ -374,20 +396,20 @@
                             <constraint firstItem="2p6-Mb-WUy" firstAttribute="leading" secondItem="81q-31-flw" secondAttribute="leading" constant="30" id="E7n-g8-2aB"/>
                             <constraint firstItem="gVu-Ev-IMb" firstAttribute="leading" secondItem="81q-31-flw" secondAttribute="leading" constant="30" id="JTf-pI-H3F"/>
                             <constraint firstItem="8eh-n6-cQo" firstAttribute="leading" secondItem="81q-31-flw" secondAttribute="leading" constant="30" id="K05-4B-DIF"/>
+                            <constraint firstItem="2p6-Mb-WUy" firstAttribute="top" secondItem="gVu-Ev-IMb" secondAttribute="bottom" constant="35" id="MdE-7M-FwV"/>
                             <constraint firstItem="81q-31-flw" firstAttribute="trailing" secondItem="gVu-Ev-IMb" secondAttribute="trailing" constant="30" id="O5i-cX-Zym"/>
-                            <constraint firstItem="8eh-n6-cQo" firstAttribute="top" secondItem="81q-31-flw" secondAttribute="top" constant="20" id="R9d-Rw-yku"/>
+                            <constraint firstItem="cA2-gG-Lzm" firstAttribute="top" secondItem="8eh-n6-cQo" secondAttribute="bottom" constant="30" id="P4v-BR-2rE"/>
                             <constraint firstItem="cA2-gG-Lzm" firstAttribute="leading" secondItem="81q-31-flw" secondAttribute="leading" constant="30" id="X59-rH-Paj"/>
+                            <constraint firstItem="8eh-n6-cQo" firstAttribute="top" secondItem="81q-31-flw" secondAttribute="top" constant="25" id="g9R-xC-dnm"/>
                             <constraint firstItem="81q-31-flw" firstAttribute="trailing" secondItem="2p6-Mb-WUy" secondAttribute="trailing" constant="30" id="kZ0-nb-LIl"/>
-                            <constraint firstItem="cA2-gG-Lzm" firstAttribute="top" secondItem="8eh-n6-cQo" secondAttribute="bottom" constant="35" id="nzu-K3-gZa"/>
-                            <constraint firstItem="2p6-Mb-WUy" firstAttribute="top" secondItem="gVu-Ev-IMb" secondAttribute="bottom" constant="25" id="zhq-vj-jc0"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addressLabel" destination="8eh-n6-cQo" id="517-gH-DuV"/>
                         <outlet property="cosmosView" destination="gVu-Ev-IMb" id="qwn-JR-W3q"/>
                         <outlet property="descriptionTextView" destination="2p6-Mb-WUy" id="vGD-D7-z9R"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Pj4-i8-hsC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5928.985507246377" y="2183.0357142857142"/>
         </scene>
@@ -681,11 +703,6 @@
             <point key="canvasLocation" x="3405.7971014492755" y="1384.8214285714284"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="gVu-Ev-IMb">
-            <size key="intrinsicContentSize" width="120" height="20"/>
-        </designable>
-    </designables>
     <resources>
         <image name="camera.fill" catalog="system" width="128" height="94"/>
         <image name="house" catalog="system" width="128" height="106"/>
@@ -694,6 +711,7 @@
         <image name="lalo-hernandez-Amo081zdJsI-unsplash" width="2243" height="2992"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
+        <image name="pin-3" width="128" height="128"/>
         <image name="sacha-verheij-5bwgW8_9OPs-unsplash" width="3648" height="5472"/>
         <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <systemColor name="labelColor">

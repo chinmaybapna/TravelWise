@@ -12,6 +12,9 @@ class StartTripViewController: UIViewController {
 
     let db = Firestore.firestore()
     
+    let date = Date()
+    let formatter = DateFormatter()
+    
     @IBOutlet weak var tripNameTextField: UITextField!  {
         didSet {
             let blackPlaceholderText = NSAttributedString(string: "Trip name",
@@ -61,11 +64,13 @@ class StartTripViewController: UIViewController {
     }
 
     @IBAction func startButtonPressed(_ sender: Any) {
+        formatter.dateFormat = "dd/MM/yyyy"
         if let tripName = tripNameTextField.text {
             db.collection("users").document(UserDefaults.standard.string(forKey: "uid")!).collection("trips").addDocument(data: [
                 "tripName": tripName,
                 "isCurrentTrip": true,
                 "tripProfileImageURL": "",
+                "startDate": formatter.string(from: date),
             ])
         }
         
