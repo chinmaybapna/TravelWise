@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		05B48BE802B3563441B4501C /* Pods_TravelWise.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EAFB91075A9093C58AACD86 /* Pods_TravelWise.framework */; };
+		13999C2C2639E9D5000FCF84 /* HomeAndProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13999C2A2639E9D5000FCF84 /* HomeAndProfileCell.swift */; };
+		13999C2D2639E9D5000FCF84 /* HomeAndProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13999C2B2639E9D5000FCF84 /* HomeAndProfileCell.xib */; };
+		13999C31263AAE80000FCF84 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13999C30263AAE80000FCF84 /* ProfileViewController.swift */; };
 		823A743E26328FA500D22753 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823A743D26328FA500D22753 /* MapViewController.swift */; };
 		823A74412632916A00D22753 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823A74402632916A00D22753 /* ContentViewController.swift */; };
 		823A74452632BE2E00D22753 /* DayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823A74432632BE2E00D22753 /* DayTableViewCell.swift */; };
@@ -28,6 +31,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		13999C2A2639E9D5000FCF84 /* HomeAndProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAndProfileCell.swift; sourceTree = "<group>"; };
+		13999C2B2639E9D5000FCF84 /* HomeAndProfileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeAndProfileCell.xib; sourceTree = "<group>"; };
+		13999C30263AAE80000FCF84 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		823A743D26328FA500D22753 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		823A74402632916A00D22753 /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		823A74432632BE2E00D22753 /* DayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTableViewCell.swift; sourceTree = "<group>"; };
@@ -112,6 +118,9 @@
 				823A74402632916A00D22753 /* ContentViewController.swift */,
 				823A74432632BE2E00D22753 /* DayTableViewCell.swift */,
 				823A74442632BE2E00D22753 /* DayTableViewCell.xib */,
+				13999C2A2639E9D5000FCF84 /* HomeAndProfileCell.swift */,
+				13999C2B2639E9D5000FCF84 /* HomeAndProfileCell.xib */,
+				13999C30263AAE80000FCF84 /* ProfileViewController.swift */,
 			);
 			path = TravelWise;
 			sourceTree = "<group>";
@@ -185,6 +194,7 @@
 			files = (
 				82A69148262306B7002731C6 /* LaunchScreen.storyboard in Resources */,
 				82A69145262306B7002731C6 /* Assets.xcassets in Resources */,
+				13999C2D2639E9D5000FCF84 /* HomeAndProfileCell.xib in Resources */,
 				82A691682623129D002731C6 /* GoogleService-Info.plist in Resources */,
 				823A74462632BE2E00D22753 /* DayTableViewCell.xib in Resources */,
 				82A69143262306B5002731C6 /* Main.storyboard in Resources */,
@@ -244,11 +254,13 @@
 				82DCA94E2626DCF800CD8D7F /* TripViewController.swift in Sources */,
 				82A6916C26236676002731C6 /* RegisterViewController.swift in Sources */,
 				823A743E26328FA500D22753 /* MapViewController.swift in Sources */,
+				13999C31263AAE80000FCF84 /* ProfileViewController.swift in Sources */,
 				82A6916F26243078002731C6 /* RegistrationDetailsViewController.swift in Sources */,
 				82DCA9392626DBA400CD8D7F /* StartTripViewController.swift in Sources */,
 				82DCA969262863B300CD8D7F /* HomeViewController.swift in Sources */,
 				82A6913C262306B5002731C6 /* AppDelegate.swift in Sources */,
 				823A74412632916A00D22753 /* ContentViewController.swift in Sources */,
+				13999C2C2639E9D5000FCF84 /* HomeAndProfileCell.swift in Sources */,
 				82A6913E262306B5002731C6 /* SceneDelegate.swift in Sources */,
 				823A74452632BE2E00D22753 /* DayTableViewCell.swift in Sources */,
 				82A6915126230748002731C6 /* LoginViewController.swift in Sources */,
