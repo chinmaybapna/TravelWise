@@ -108,7 +108,11 @@ class RegistrationDetailsViewController: UIViewController {
                         "name": name,
                         "dob": dob,
                         "hometown": hometown,
-                        "uid": uid
+                        "uid": uid,
+                        "followers": 0,
+                        "following": 0,
+                        "numberOfTrips": 0,
+                        "profileImageURL": ""
                     ])
                 }
             }

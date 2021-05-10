@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 import SDWebImage
 
-class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource {
+class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var segments: UISegmentedControl!
@@ -25,6 +25,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         
         searchBar.delegate = self
         tableView.dataSource = self
+        tableView.delegate = self
         
         tableView.register(UINib(nibName: "PeopleSearchTableViewCell", bundle: nil), forCellReuseIdentifier: "people_search_cell")
         self.tableView.tableFooterView = UIView()
@@ -57,8 +58,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
                     
                     let name = data["name"] as! String
                     let hometown = data["hometown"] as! String
+                    let uid = data["uid"] as! String
                     
-                    let searchedUser = User(name: name, hometown: hometown)
+                    let searchedUser = User(name: name, hometown: hometown, uid: uid)
                     self.searchedUsers.append(searchedUser)
                 }
                 
@@ -66,6 +68,13 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
                     self.tableView.reloadData()
                 }
             }
+        }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchedUsers = []
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
     }
     
@@ -79,5 +88,17 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         cell.hometown.text = searchedUsers[indexPath.row].hometown
         cell.profileImageView.sd_setImage(with: URL(string: ""), placeholderImage: UIImage(named: "atikh-bana-FtBS0p23fcc-unsplash"))
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "show_user_profile", sender: self)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "show_user_profile") {
+            let userProfileVC = segue.destination as! SearchProfileViewController
+            userProfileVC.uid = searchedUsers[tableView.indexPathForSelectedRow!.row].uid
+        }
     }
 }

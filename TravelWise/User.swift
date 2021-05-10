@@ -10,4 +10,5 @@ import Foundation
 struct User {
     var name: String
     var hometown: String
+    var uid: String
 }
