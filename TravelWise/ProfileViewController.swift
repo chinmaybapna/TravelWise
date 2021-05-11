@@ -6,44 +6,105 @@
 //
 
 import UIKit
+import Firebase
 
-class ProfileViewController : UIViewController{
+class ProfileViewController : UIViewController, UITableViewDataSource {
     
-    var trips = [
-        [   "profileImage": "christopher-campbell-rDEOVtE7vOs-unsplash" , "profileName" : "Nidhi Bhat G", "tripImage" : "Paris" , "tripName" : "Summer time at Paris", "tripUpvotes" : "1678 upvotes"
-        ],
-        [   "profileImage": "atikh-bana-FtBS0p23fcc-unsplash" , "profileName" : "Nidhi Bhat G", "tripImage" : "pantheon-rome-dome-635x422" , "tripName" : "France trip with friends", "tripUpvotes" : "1231 upvotes"
-        ],
-        [   "profileImage": "clayton-cardinalli-ZqmmwcE1DQ8-unsplash" , "profileName" : "Nidhi Bhat G", "tripImage" : "rowan-heuvel-U6t80TWJ1DM-unsplash" , "tripName" : "Beach days in Australia", "tripUpvotes" : "1534 upvotes"
-        ],
-        [   "profileImage": "dave-goudreau-bB_zWnlenwQ-unsplash" , "profileName" : "Nidhi Bhat G", "tripImage" : "HERO_UltimateRome_Hero_shutterstock789412159" , "tripName" : "Work trip to Rome turned into vacation", "tripUpvotes" : "5322 upvotes"
-        ]
-    ]
+    let db = Firestore.firestore()
     
-    @IBOutlet weak var userProfileImage: UIImageView!
-    @IBOutlet weak var userProfileName: UILabel!
-    @IBOutlet weak var userProfilePlace: UILabel!
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var hometownLabel: UILabel!
     @IBOutlet weak var followersLabel: UILabel!
     @IBOutlet weak var tripsLabel: UILabel!
     @IBOutlet weak var followingLabel: UILabel!
-    @IBOutlet weak var profileTableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
+    
+    var uid = UserDefaults.standard.string(forKey: "uid")!
+    var trips: [Trip] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        profileTableView.dataSource = self
-        profileTableView.register(UINib(nibName: "ProfileTableViewCell", bundle: nil), forCellReuseIdentifier: "ReusableHomeCell")
-        userProfileImage.image = UIImage(named: "christopher-campbell-rDEOVtE7vOs-unsplash")
-        userProfileImage.layer.cornerRadius = userProfileImage.frame.size.height / 2
-        userProfileName.text = "Nidhi Bhat"
-        userProfilePlace.text = "Bangalore"
-        tripsLabel.text = "12"
-        followersLabel.text = "1K"
-        followingLabel.text = "245"
+        
+        tableView.dataSource = self
+        tableView.tableFooterView = UIView()
+        
+        tableView.register(UINib(nibName: "ProfileTableViewCell", bundle: nil), forCellReuseIdentifier: "ReusableHomeCell")
+        
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.height / 2
+        
+        followersLabel.isUserInteractionEnabled = true
+        let tapGesture1 = UITapGestureRecognizer(target: self, action: #selector(showFollowers))
+        followersLabel.addGestureRecognizer(tapGesture1)
+        
+        followingLabel.isUserInteractionEnabled = true
+        let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(showFollowing))
+        followingLabel.addGestureRecognizer(tapGesture2)
     }
     
-}
-
-extension ProfileViewController :UITableViewDataSource {
+    func fetchUserData() {
+        db.collection("users").document(uid).getDocument { (querySnapshot, error) in
+            if error != nil {
+                print(error?.localizedDescription)
+            }
+            else {
+                let data = querySnapshot?.data()
+                
+                if let data = data {
+                    let name = data["name"] as! String
+                    let hometown = data["hometown"] as! String
+                    let profileImageURL = data["profileImageURL"] as! String
+                    let followers = data["followers"] as! Int
+                    let following = data["following"] as! Int
+                    let numberOfTrips = data["numberOfTrips"] as! Int
+                    
+                    self.nameLabel.text = name
+                    self.hometownLabel.text = hometown
+                    self.profileImageView.sd_setImage(with: URL(string: profileImageURL), placeholderImage: UIImage(named: "atikh-bana-FtBS0p23fcc-unsplash"))
+                    self.followersLabel.text = "\(followers)"
+                    self.followingLabel.text = "\(following)"
+                    self.tripsLabel.text = "\(numberOfTrips)"
+                }
+            }
+        }
+        
+        db.collection("users").document(uid).collection("trips").getDocuments { (querySnapshot, error) in
+            if error != nil {
+                print(error?.localizedDescription)
+            }
+            else {
+                for document in querySnapshot!.documents {
+                    let data = document.data()
+                    
+                    let tripName = data["tripName"] as! String
+                    let tripProfileImageURL = data["tripProfileImageURL"] as! String
+                    let upvotes = data["upvotes"] as! Int
+                    
+                    let tempTrip = Trip(name: tripName, tripImageURL: tripProfileImageURL, upvotes: upvotes)
+                    self.trips.append(tempTrip)
+                }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        trips = []
+        fetchUserData()
+    }
+    
+    @objc
+    func showFollowers() {
+        performSegue(withIdentifier: "show_followers", sender: nil)
+    }
+    
+    @objc
+    func showFollowing() {
+        performSegue(withIdentifier: "show_following", sender: nil)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return trips.count
     }
@@ -51,11 +112,23 @@ extension ProfileViewController :UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableHomeCell", for: indexPath) as! ProfileTableViewCell
         let trip = trips[indexPath.row]
-        cell.tripName.text = trip["tripName"]
-        cell.tripUpvotes.text = trip["tripUpvotes"]
-        cell.tripImage.image = UIImage(named: trip["tripImage"]!)
+        cell.tripName.text = trip.name
+        cell.tripUpvotes.text = "\(trip.upvotes) upvotes"
+        cell.tripImage.sd_setImage(with: URL(string: trip.tripImageURL), placeholderImage: UIImage(named: "Paris"))
         return cell
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "show_followers") {
+            let ffVC = segue.destination as! FollowersFollowingViewController
+            ffVC.showFollowers = true
+            ffVC.showFollowing = false
+        }
+        
+        if(segue.identifier == "show_following") {
+            let ffVC = segue.destination as! FollowersFollowingViewController
+            ffVC.showFollowers = false
+            ffVC.showFollowing = true
+        }
+    }
 }

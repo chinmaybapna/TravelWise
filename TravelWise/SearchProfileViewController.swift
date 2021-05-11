@@ -37,6 +37,7 @@ class SearchProfileViewController: UIViewController, UITableViewDataSource {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        trips = []
         if let uid = uid {
             if UserDefaults.standard.string(forKey: "uid") == uid {
                 self.navigationItem.rightBarButtonItem = nil
@@ -47,7 +48,7 @@ class SearchProfileViewController: UIViewController, UITableViewDataSource {
                 }
                 else {
                     if querySnapshot?.documents.count == 1 {
-                        self.followButton.title = "following"
+                        self.followButton.title = "Following"
                         self.following = true
                     }
                 }
@@ -157,4 +158,3 @@ class SearchProfileViewController: UIViewController, UITableViewDataSource {
         }
     }
 }
-

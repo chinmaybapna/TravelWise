@@ -104,6 +104,11 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "show_places_visited", sender: self)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     
     @IBAction func addImage(_ sender: UIButton) {
         let imagePickerController = UIImagePickerController()
@@ -126,5 +131,10 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         self.present(actionSheet, animated: true, completion: nil)
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "show_places_visited") {
+            let placesVisitedVC = segue.destination as! PlacesVisitedViewController
+            placesVisitedVC.date = dates[tableView.indexPathForSelectedRow!.row]
+        }
+    }
 }

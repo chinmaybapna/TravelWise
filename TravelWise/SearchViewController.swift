@@ -59,8 +59,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
                     let name = data["name"] as! String
                     let hometown = data["hometown"] as! String
                     let uid = data["uid"] as! String
+                    let profileImageURL = data["profileImageURL"] as! String
                     
-                    let searchedUser = User(name: name, hometown: hometown, uid: uid)
+                    let searchedUser = User(name: name, hometown: hometown, uid: uid, profileImageURL: profileImageURL)
                     self.searchedUsers.append(searchedUser)
                 }
                 
@@ -86,7 +87,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCell(withIdentifier: "people_search_cell", for: indexPath) as! PeopleSearchTableViewCell
         cell.name.text = searchedUsers[indexPath.row].name
         cell.hometown.text = searchedUsers[indexPath.row].hometown
-        cell.profileImageView.sd_setImage(with: URL(string: ""), placeholderImage: UIImage(named: "atikh-bana-FtBS0p23fcc-unsplash"))
+        cell.profileImageView.sd_setImage(with: URL(string: searchedUsers[indexPath.row].profileImageURL), placeholderImage: UIImage(named: "atikh-bana-FtBS0p23fcc-unsplash"))
         return cell
     }
     

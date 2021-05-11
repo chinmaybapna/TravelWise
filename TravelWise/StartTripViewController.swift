@@ -71,7 +71,8 @@ class StartTripViewController: UIViewController {
                 "isCurrentTrip": true,
                 "tripProfileImageURL": "",
                 "startDate": formatter.string(from: date),
-                "upvotes": 0
+                "upvotes": 0,
+                "numberOfTrips": FieldValue.increment(Int64(1))
             ])
         }
         
