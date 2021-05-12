@@ -42,6 +42,9 @@
 		82DCA9392626DBA400CD8D7F /* StartTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DCA9382626DBA400CD8D7F /* StartTripViewController.swift */; };
 		82DCA94E2626DCF800CD8D7F /* TripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DCA94D2626DCF800CD8D7F /* TripViewController.swift */; };
 		82DCA969262863B300CD8D7F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DCA968262863B300CD8D7F /* HomeViewController.swift */; };
+		82F5E5A5264AC45A0010F017 /* PlaceVisitedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F5E5A3264AC45A0010F017 /* PlaceVisitedTableViewCell.swift */; };
+		82F5E5A6264AC45A0010F017 /* PlaceVisitedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82F5E5A4264AC45A0010F017 /* PlaceVisitedTableViewCell.xib */; };
+		82F5E5A8264AE0050010F017 /* PlaceExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F5E5A7264AE0050010F017 /* PlaceExperienceViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +84,9 @@
 		82DCA9382626DBA400CD8D7F /* StartTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTripViewController.swift; sourceTree = "<group>"; };
 		82DCA94D2626DCF800CD8D7F /* TripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewController.swift; sourceTree = "<group>"; };
 		82DCA968262863B300CD8D7F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		82F5E5A3264AC45A0010F017 /* PlaceVisitedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceVisitedTableViewCell.swift; sourceTree = "<group>"; };
+		82F5E5A4264AC45A0010F017 /* PlaceVisitedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaceVisitedTableViewCell.xib; sourceTree = "<group>"; };
+		82F5E5A7264AE0050010F017 /* PlaceExperienceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceExperienceViewController.swift; sourceTree = "<group>"; };
 		83357BB699C047E184DE3516 /* Pods-TravelWise.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelWise.release.xcconfig"; path = "Target Support Files/Pods-TravelWise/Pods-TravelWise.release.xcconfig"; sourceTree = "<group>"; };
 		9EAFB91075A9093C58AACD86 /* Pods_TravelWise.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelWise.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C875684EC4F25B216460F080 /* Pods-TravelWise.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelWise.debug.xcconfig"; path = "Target Support Files/Pods-TravelWise/Pods-TravelWise.debug.xcconfig"; sourceTree = "<group>"; };
@@ -128,6 +134,8 @@
 		82A6913A262306B5002731C6 /* TravelWise */ = {
 			isa = PBXGroup;
 			children = (
+				82F5E5A9264BC4800010F017 /* Modals */,
+				82F5E5AA264BC4EC0010F017 /* Views */,
 				82A6913B262306B5002731C6 /* AppDelegate.swift */,
 				82A6913D262306B5002731C6 /* SceneDelegate.swift */,
 				82A6913F262306B5002731C6 /* ViewController.swift */,
@@ -136,6 +144,24 @@
 				82A69146262306B7002731C6 /* LaunchScreen.storyboard */,
 				82A69149262306B7002731C6 /* Info.plist */,
 				82A691672623129D002731C6 /* GoogleService-Info.plist */,
+			);
+			path = TravelWise;
+			sourceTree = "<group>";
+		};
+		82F5E5A9264BC4800010F017 /* Modals */ = {
+			isa = PBXGroup;
+			children = (
+				8225D2D926483CAD00A9A7CB /* User.swift */,
+				8225D2ED264A6A0500A9A7CB /* PlaceVisited.swift */,
+				8225D2E126491F3000A9A7CB /* Trip.swift */,
+			);
+			path = Modals;
+			sourceTree = "<group>";
+		};
+		82F5E5AA264BC4EC0010F017 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				82F5E5AB264BC5210010F017 /* Table View Cells */,
 				82A6915026230748002731C6 /* LoginViewController.swift */,
 				82A6916B26236676002731C6 /* RegisterViewController.swift */,
 				82A6916E26243078002731C6 /* RegistrationDetailsViewController.swift */,
@@ -144,27 +170,34 @@
 				82DCA968262863B300CD8D7F /* HomeViewController.swift */,
 				823A743D26328FA500D22753 /* MapViewController.swift */,
 				823A74402632916A00D22753 /* ContentViewController.swift */,
+				13999C30263AAE80000FCF84 /* ProfileViewController.swift */,
+				8225D2D7264834A500A9A7CB /* SearchViewController.swift */,
+				8225D2DF264913F500A9A7CB /* SearchProfileViewController.swift */,
+				8225D2E726495F5500A9A7CB /* FollowersFollowingViewController.swift */,
+				8225D2E9264A59CA00A9A7CB /* PlacesVisitedViewController.swift */,
+				8225D2EB264A5A3E00A9A7CB /* PlacesListContentViewController.swift */,
+				82F5E5A7264AE0050010F017 /* PlaceExperienceViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		82F5E5AB264BC5210010F017 /* Table View Cells */ = {
+			isa = PBXGroup;
+			children = (
 				823A74432632BE2E00D22753 /* DayTableViewCell.swift */,
 				823A74442632BE2E00D22753 /* DayTableViewCell.xib */,
 				13999C2A2639E9D5000FCF84 /* HomeTableViewCell.swift */,
 				13999C2B2639E9D5000FCF84 /* HomeTableViewCell.xib */,
-				13999C30263AAE80000FCF84 /* ProfileViewController.swift */,
 				8225D2D326481DEA00A9A7CB /* ProfileTableViewCell.swift */,
 				8225D2D426481DEA00A9A7CB /* ProfileTableViewCell.xib */,
-				8225D2D7264834A500A9A7CB /* SearchViewController.swift */,
-				8225D2D926483CAD00A9A7CB /* User.swift */,
 				8225D2DB26483E3600A9A7CB /* PeopleSearchTableViewCell.swift */,
 				8225D2DC26483E3600A9A7CB /* PeopleSearchTableViewCell.xib */,
-				8225D2DF264913F500A9A7CB /* SearchProfileViewController.swift */,
-				8225D2E126491F3000A9A7CB /* Trip.swift */,
 				8225D2E326495BB800A9A7CB /* FollowersFollowingTableViewCell.swift */,
 				8225D2E426495BB800A9A7CB /* FollowersFollowingTableViewCell.xib */,
-				8225D2E726495F5500A9A7CB /* FollowersFollowingViewController.swift */,
-				8225D2E9264A59CA00A9A7CB /* PlacesVisitedViewController.swift */,
-				8225D2EB264A5A3E00A9A7CB /* PlacesListContentViewController.swift */,
-				8225D2ED264A6A0500A9A7CB /* PlaceVisited.swift */,
+				82F5E5A3264AC45A0010F017 /* PlaceVisitedTableViewCell.swift */,
+				82F5E5A4264AC45A0010F017 /* PlaceVisitedTableViewCell.xib */,
 			);
-			path = TravelWise;
+			path = "Table View Cells";
 			sourceTree = "<group>";
 		};
 		8C031D9A29CD50BEE144A52A /* Frameworks */ = {
@@ -238,6 +271,7 @@
 				82A69145262306B7002731C6 /* Assets.xcassets in Resources */,
 				8225D2E626495BB900A9A7CB /* FollowersFollowingTableViewCell.xib in Resources */,
 				13999C2D2639E9D5000FCF84 /* HomeTableViewCell.xib in Resources */,
+				82F5E5A6264AC45A0010F017 /* PlaceVisitedTableViewCell.xib in Resources */,
 				8225D2D626481DEA00A9A7CB /* ProfileTableViewCell.xib in Resources */,
 				8225D2DE26483E3600A9A7CB /* PeopleSearchTableViewCell.xib in Resources */,
 				82A691682623129D002731C6 /* GoogleService-Info.plist in Resources */,
@@ -295,6 +329,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82F5E5A5264AC45A0010F017 /* PlaceVisitedTableViewCell.swift in Sources */,
+				82F5E5A8264AE0050010F017 /* PlaceExperienceViewController.swift in Sources */,
 				8225D2EA264A59CB00A9A7CB /* PlacesVisitedViewController.swift in Sources */,
 				8225D2E226491F3000A9A7CB /* Trip.swift in Sources */,
 				82A69140262306B5002731C6 /* ViewController.swift in Sources */,

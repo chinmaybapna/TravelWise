@@ -135,6 +135,9 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         if(segue.identifier == "show_places_visited") {
             let placesVisitedVC = segue.destination as! PlacesVisitedViewController
             placesVisitedVC.date = dates[tableView.indexPathForSelectedRow!.row]
+            
+//            let placesListContentVC = PlacesListContentViewController()
+//            placesListContentVC.date = dates[tableView.indexPathForSelectedRow!.row]
         }
     }
 }

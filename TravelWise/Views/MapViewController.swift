@@ -175,6 +175,10 @@ extension MapViewController: MKMapViewDelegate {
                 if let name = name {
                     self?.currentLocation = name
                     print("==========\(name)==========")
+                    let contentVC = self?.storyboard?.instantiateViewController(identifier: "content_vc") as! ContentViewController
+                    contentVC.locationName = name
+                    self!.fpc.set(contentViewController: contentVC)
+                    self!.fpc.addPanel(toParent: self!)
                 }
             }
         }

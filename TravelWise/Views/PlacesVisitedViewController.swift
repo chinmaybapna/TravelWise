@@ -27,11 +27,6 @@ class PlacesVisitedViewController: UIViewController, FloatingPanelControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fpc = FloatingPanelController()
-        fpc.delegate = self
-        let placesVisitedVC = storyboard?.instantiateViewController(identifier: "places_list_vc") as! PlacesListContentViewController
-        fpc.set(contentViewController: placesVisitedVC)
-        fpc.addPanel(toParent: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,6 +34,13 @@ class PlacesVisitedViewController: UIViewController, FloatingPanelControllerDele
             self.fetchPlacesVisited {
                 self.createAnnotations {
                     self.zoomLevel(location: self.middlePointOfListMarkers(placesList: self.placesVisited))
+                    self.fpc = FloatingPanelController()
+                    self.fpc.delegate = self
+                    let placesVisitedVC = self.storyboard?.instantiateViewController(identifier: "places_list_vc") as! PlacesListContentViewController
+                    placesVisitedVC.date = self.date
+                    placesVisitedVC.placesVisited = self.placesVisited
+                    self.fpc.set(contentViewController: placesVisitedVC)
+                    self.fpc.addPanel(toParent: self)
                 }
             }
         }
@@ -72,8 +74,9 @@ class PlacesVisitedViewController: UIViewController, FloatingPanelControllerDele
                         let latitude = data["lat"] as! Double
                         let longitude = data["long"] as! Double
                         let locationName = data["locationName"] as! String
+                        let description = data["description"] as! String
                         
-                        let placeVisited = PlaceVisited(lat: latitude, long: longitude, locationName: locationName)
+                        let placeVisited = PlaceVisited(lat: latitude, long: longitude, locationName: locationName, description: description)
                         placesVisited.append(placeVisited)
                     }
                     completion()

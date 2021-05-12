@@ -11,4 +11,5 @@ struct PlaceVisited {
     var lat: Double
     var long: Double
     var locationName: String
+    var description: String
 }

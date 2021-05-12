@@ -11,8 +11,9 @@ import Cosmos
 class ContentViewController: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var descriptionTextView: UITextView!
-    @IBOutlet weak var addressLabel: UITextView!
+    @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var cosmosView: CosmosView!
+    var locationName: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,12 @@ class ContentViewController: UIViewController, UITextViewDelegate {
         
         cosmosView.settings.starSize = 30
         cosmosView.settings.starMargin = 10
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let locationName = locationName {
+            addressLabel.text = locationName
+        }
     }
     
     @objc func viewTapped() {
