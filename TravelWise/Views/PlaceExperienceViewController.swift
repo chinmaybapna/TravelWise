@@ -53,6 +53,21 @@ class PlaceExperienceViewController: UIViewController, EditExperienceDelegate {
         }
     }
     
+    @IBAction func deleteButtonPressed(_ sender: Any) {
+        if let placeID = placeID {
+            db.collection("users").document(UserDefaults.standard.string(forKey: "uid")!).collection("trips").document(self.currentTripID!).collection("placesVisited").document(placeID).delete { error in
+                if error != nil {
+                    print(error?.localizedDescription)
+                }
+                else {
+                    self.dismiss(animated: true) {
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
+                    }
+                }
+            }
+        }
+    }
+    
     func updateExperience(description: String) {
         descriptionLabel.text = description
     }

@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 import SDWebImage
 
-class FollowersFollowingViewController: UIViewController, UITableViewDataSource {
+class FollowersFollowingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     let db = Firestore.firestore()
     
@@ -25,6 +25,7 @@ class FollowersFollowingViewController: UIViewController, UITableViewDataSource 
         super.viewDidLoad()
 
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.tableFooterView = UIView()
         tableView.register(UINib(nibName: "FollowersFollowingTableViewCell", bundle: nil), forCellReuseIdentifier: "followers_following_cell")
         
@@ -95,7 +96,6 @@ class FollowersFollowingViewController: UIViewController, UITableViewDataSource 
                         
                         let tempUser = User(name: name, hometown: hometown, uid: uid, profileImageURL: profileImageURL)
                         self.users.append(tempUser)
-//                                    print(tempUser)
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
                         }
@@ -114,5 +114,15 @@ class FollowersFollowingViewController: UIViewController, UITableViewDataSource 
         cell.nameLabel.text = users[indexPath.row].name
         cell.profileImageView.sd_setImage(with: URL(string: users[indexPath.row].profileImageURL), placeholderImage: UIImage(named: "atikh-bana-FtBS0p23fcc-unsplash"))
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "show_user_profile", sender: nil)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let userProfileVC = segue.destination as! SearchProfileViewController
+        userProfileVC.uid = users[tableView.indexPathForSelectedRow!.row].uid
     }
 }

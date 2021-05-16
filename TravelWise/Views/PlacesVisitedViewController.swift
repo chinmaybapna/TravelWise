@@ -27,9 +27,11 @@ class PlacesVisitedViewController: UIViewController, FloatingPanelControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reload), name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        placesVisited = []
         getCurrentTripID {
             self.fetchPlacesVisited {
                 self.createAnnotations {
@@ -42,6 +44,28 @@ class PlacesVisitedViewController: UIViewController, FloatingPanelControllerDele
                     placesVisitedVC.currentTripID = self.currentTripID
                     self.fpc.set(contentViewController: placesVisitedVC)
                     self.fpc.addPanel(toParent: self)
+                }
+            }
+        }
+    }
+    
+    @objc func reload() {
+        placesVisited = []
+        getCurrentTripID {
+            self.fetchPlacesVisited {
+                if(self.placesVisited.count == 0) {
+                    self.navigationController?.popViewController(animated: true)
+                }
+                else {
+                    self.createAnnotations {
+                        self.zoomLevel(location: self.middlePointOfListMarkers(placesList: self.placesVisited))
+                        let placesVisitedVC = self.storyboard?.instantiateViewController(identifier: "places_list_vc") as! PlacesListContentViewController
+                        placesVisitedVC.date = self.date
+                        placesVisitedVC.placesVisited = self.placesVisited
+                        placesVisitedVC.currentTripID = self.currentTripID
+                        self.fpc.set(contentViewController: placesVisitedVC)
+                        self.fpc.addPanel(toParent: self)
+                    }
                 }
             }
         }

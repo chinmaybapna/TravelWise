@@ -37,7 +37,10 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         tableView.register(UINib(nibName: "DayTableViewCell", bundle: nil), forCellReuseIdentifier: "day_cell")
         
         self.tableView.tableFooterView = UIView()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.dates = []
         getTripInfo {
             self.db.collection("users").document(UserDefaults.standard.string(forKey: "uid")!).collection("trips").document(self.currentTripID!).collection("placesVisited").order(by: "timeStamp").getDocuments { (querySnapshot, error) in
                 if error != nil {
@@ -63,10 +66,6 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 }
             }
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
     }
     
     func getTripInfo(getPlacesVisited: @escaping () -> Void) {

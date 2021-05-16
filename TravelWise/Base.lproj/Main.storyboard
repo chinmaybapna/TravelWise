@@ -692,6 +692,7 @@
                     <navigationItem key="navigationItem" id="gW8-Ub-bap"/>
                     <connections>
                         <outlet property="tableView" destination="QhN-vV-cBj" id="dQU-Ex-6FM"/>
+                        <segue destination="dFZ-iF-7LP" kind="show" identifier="show_user_profile" id="haO-Bk-Pf2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z23-sN-HKh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1292,6 +1293,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nxg-rD-h9v">
+                                <rect key="frame" x="20" y="20" width="50" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Delete"/>
+                                <connections>
+                                    <action selector="deleteButtonPressed:" destination="yaI-uB-Mb3" eventType="touchUpInside" id="isj-h9-UvK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Qx6-e3-1b5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1307,7 +1316,9 @@
                             <constraint firstItem="oVg-BS-aFh" firstAttribute="leading" secondItem="Qx6-e3-1b5" secondAttribute="leading" constant="30" id="SCH-vT-cEC"/>
                             <constraint firstItem="aE9-Wa-JX3" firstAttribute="leading" secondItem="Qx6-e3-1b5" secondAttribute="leading" constant="30" id="V5K-CG-VV9"/>
                             <constraint firstItem="Qx6-e3-1b5" firstAttribute="trailing" secondItem="M4V-SF-exP" secondAttribute="trailing" constant="30" id="VuB-bL-bjX"/>
+                            <constraint firstItem="Nxg-rD-h9v" firstAttribute="leading" secondItem="Qx6-e3-1b5" secondAttribute="leading" constant="20" id="c1y-sc-9NE"/>
                             <constraint firstItem="aE9-Wa-JX3" firstAttribute="top" secondItem="oVg-BS-aFh" secondAttribute="bottom" constant="15" id="c73-gs-bhG"/>
+                            <constraint firstItem="Nxg-rD-h9v" firstAttribute="top" secondItem="Qx6-e3-1b5" secondAttribute="top" constant="20" id="fIJ-70-d0M"/>
                             <constraint firstItem="ddl-4P-eIa" firstAttribute="top" secondItem="Qx6-e3-1b5" secondAttribute="top" constant="20" id="hUa-yR-A5h"/>
                             <constraint firstItem="4nX-cy-Dzs" firstAttribute="top" secondItem="M4V-SF-exP" secondAttribute="bottom" constant="30" id="i63-6v-fSO"/>
                             <constraint firstItem="oVg-BS-aFh" firstAttribute="top" secondItem="n5G-11-aHG" secondAttribute="bottom" constant="30" id="lh5-aD-7Uf"/>
@@ -1418,6 +1429,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
+        <segue reference="haO-Bk-Pf2"/>
         <segue reference="qQJ-Fe-WpM"/>
     </inferredMetricsTieBreakers>
     <resources>
