@@ -27,6 +27,22 @@ class FollowersFollowingViewController: UIViewController, UITableViewDataSource 
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
         tableView.register(UINib(nibName: "FollowersFollowingTableViewCell", bundle: nil), forCellReuseIdentifier: "followers_following_cell")
+        
+        if let showFollowers = showFollowers, let showFollowing = showFollowing {
+            if showFollowers && !showFollowing {
+                getUIDsForFollowers {
+                    self.fetchUsers()
+                }
+            }
+            else if !showFollowers && showFollowing {
+                getUIDsForFollowing {
+                    self.fetchUsers()
+                }
+            }
+            else {
+                //alert box
+            }
+        }
     }
     
     func getUIDsForFollowers(completion: @escaping () -> ()) {
@@ -60,21 +76,7 @@ class FollowersFollowingViewController: UIViewController, UITableViewDataSource 
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if let showFollowers = showFollowers, let showFollowing = showFollowing {
-            if showFollowers && !showFollowing {
-                getUIDsForFollowers {
-                    self.fetchUsers()
-                }
-            }
-            else if !showFollowers && showFollowing {
-                getUIDsForFollowing {
-                    self.fetchUsers()
-                }
-            }
-            else {
-                //alert box
-            }
-        }
+        
     }
     
     func fetchUsers() {

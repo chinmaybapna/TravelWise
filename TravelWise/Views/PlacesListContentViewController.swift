@@ -10,12 +10,11 @@ import Firebase
 
 class PlacesListContentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    var date: String?
     let db = Firestore.firestore()
     
     @IBOutlet weak var tableView: UITableView!
     var placesVisited: [PlaceVisited] = []
-    
-    var date: String?
     var currentTripID: String?
 
     override func viewDidLoad() {
@@ -51,7 +50,10 @@ class PlacesListContentViewController: UIViewController, UITableViewDataSource, 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "show_visit_experience") {
             let placeExpVC = segue.destination as! PlaceExperienceViewController
-            placeExpVC.placeDescription = placesVisited[tableView.indexPathForSelectedRow!.row].description
+            placeExpVC.placeID = placesVisited[tableView.indexPathForSelectedRow!.row].placeID
+            placeExpVC.placeName = placesVisited[tableView.indexPathForSelectedRow!.row].locationName
+            placeExpVC.currentTripID = self.currentTripID
+            placeExpVC.date = self.date
         }
     }
 }

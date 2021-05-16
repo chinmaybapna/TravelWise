@@ -29,6 +29,7 @@
 		823A74412632916A00D22753 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823A74402632916A00D22753 /* ContentViewController.swift */; };
 		823A74452632BE2E00D22753 /* DayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823A74432632BE2E00D22753 /* DayTableViewCell.swift */; };
 		823A74462632BE2E00D22753 /* DayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 823A74442632BE2E00D22753 /* DayTableViewCell.xib */; };
+		8267D973264D65C600CEC91A /* EditExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8267D972264D65C600CEC91A /* EditExperienceViewController.swift */; };
 		82A6913C262306B5002731C6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A6913B262306B5002731C6 /* AppDelegate.swift */; };
 		82A6913E262306B5002731C6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A6913D262306B5002731C6 /* SceneDelegate.swift */; };
 		82A69140262306B5002731C6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A6913F262306B5002731C6 /* ViewController.swift */; };
@@ -69,6 +70,7 @@
 		823A74402632916A00D22753 /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		823A74432632BE2E00D22753 /* DayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTableViewCell.swift; sourceTree = "<group>"; };
 		823A74442632BE2E00D22753 /* DayTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DayTableViewCell.xib; sourceTree = "<group>"; };
+		8267D972264D65C600CEC91A /* EditExperienceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExperienceViewController.swift; sourceTree = "<group>"; };
 		82A69138262306B5002731C6 /* TravelWise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelWise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82A6913B262306B5002731C6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82A6913D262306B5002731C6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				8225D2E9264A59CA00A9A7CB /* PlacesVisitedViewController.swift */,
 				8225D2EB264A5A3E00A9A7CB /* PlacesListContentViewController.swift */,
 				82F5E5A7264AE0050010F017 /* PlaceExperienceViewController.swift */,
+				8267D972264D65C600CEC91A /* EditExperienceViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				8225D2E826495F5500A9A7CB /* FollowersFollowingViewController.swift in Sources */,
 				82DCA969262863B300CD8D7F /* HomeViewController.swift in Sources */,
 				8225D2EE264A6A0500A9A7CB /* PlaceVisited.swift in Sources */,
+				8267D973264D65C600CEC91A /* EditExperienceViewController.swift in Sources */,
 				82A6913C262306B5002731C6 /* AppDelegate.swift in Sources */,
 				8225D2D8264834A600A9A7CB /* SearchViewController.swift in Sources */,
 				823A74412632916A00D22753 /* ContentViewController.swift in Sources */,

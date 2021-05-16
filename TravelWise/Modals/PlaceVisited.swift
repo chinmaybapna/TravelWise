@@ -8,6 +8,7 @@
 import Foundation
 
 struct PlaceVisited {
+    var placeID: String
     var lat: Double
     var long: Double
     var locationName: String

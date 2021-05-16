@@ -39,6 +39,7 @@ class PlacesVisitedViewController: UIViewController, FloatingPanelControllerDele
                     let placesVisitedVC = self.storyboard?.instantiateViewController(identifier: "places_list_vc") as! PlacesListContentViewController
                     placesVisitedVC.date = self.date
                     placesVisitedVC.placesVisited = self.placesVisited
+                    placesVisitedVC.currentTripID = self.currentTripID
                     self.fpc.set(contentViewController: placesVisitedVC)
                     self.fpc.addPanel(toParent: self)
                 }
@@ -71,12 +72,13 @@ class PlacesVisitedViewController: UIViewController, FloatingPanelControllerDele
                     for document in querySnapshot!.documents {
                         let data = document.data()
                         
+                        let placeID = document.documentID
                         let latitude = data["lat"] as! Double
                         let longitude = data["long"] as! Double
                         let locationName = data["locationName"] as! String
                         let description = data["description"] as! String
                         
-                        let placeVisited = PlaceVisited(lat: latitude, long: longitude, locationName: locationName, description: description)
+                        let placeVisited = PlaceVisited(placeID: placeID, lat: latitude, long: longitude, locationName: locationName, description: description)
                         placesVisited.append(placeVisited)
                     }
                     completion()
