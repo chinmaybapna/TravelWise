@@ -11,7 +11,9 @@ import SDWebImage
 
 class TripViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource {
     
+    var upvoted = false
     
+    let uid = UserDefaults.standard.string(forKey: "uid")!
     let db = Firestore.firestore()
     var dates: [String] = []
     
@@ -21,6 +23,8 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     var tripProfileImageURL: String?
     var currentTripID: String?
     
+    @IBOutlet weak var upvotesLabel: UILabel!
+    @IBOutlet weak var upvoteButton: UIButton!
     @IBOutlet weak var tripProfileImageView: UIImageView!
     @IBOutlet weak var tripNameLabel: UILabel!
     @IBOutlet weak var chooseTripProfileImageButton: UIButton!
@@ -65,6 +69,18 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                     }
                 }
             }
+            
+            self.db.collection("users").document(self.uid).collection("trips").document(self.currentTripID!).collection("upvotes").whereField("uid", isEqualTo: UserDefaults.standard.string(forKey: "uid")!).getDocuments { (querySnapshot, error) in
+                if error != nil {
+                    print(error?.localizedDescription)
+                }
+                else {
+                    if querySnapshot?.documents.count == 1 {
+                        self.upvoteButton.setImage(#imageLiteral(resourceName: "like-3"), for: .normal)
+                        self.upvoted = true
+                    }
+                }
+            }
         }
     }
     
@@ -81,13 +97,36 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                     print(self.currentTripID)
                     self.tripName = data["tripName"] as? String
                     self.tripProfileImageURL = data["tripProfileImageURL"] as? String
-                    
+                    self.upvotesLabel.text = "\(data["upvotes"] as! Int)"
                     self.tripNameLabel.text = self.tripName
                     self.tripProfileImageView.sd_setImage(with: URL(string: ""), placeholderImage: UIImage(named: "rowan-heuvel-U6t80TWJ1DM-unsplash"))
                 }
                 
                 getPlacesVisited()
             }
+        }
+    }
+    
+    @IBAction func upvoteButtonCliked(_ sender: Any) {
+        if !upvoted {
+            self.db.collection("users").document(self.uid).collection("trips").document(self.currentTripID!).updateData([
+                "upvotes": FieldValue.increment(Int64(1))
+            ])
+            upvotesLabel.text = "\(Int(self.upvotesLabel.text!)! + 1)"
+            upvoteButton.setImage(#imageLiteral(resourceName: "like-3"), for: .normal)
+            upvoted = true
+            self.db.collection("users").document(self.uid).collection("trips").document(self.currentTripID!).collection("upvotes").document(UserDefaults.standard.string(forKey: "uid")!).setData([
+                "uid": UserDefaults.standard.string(forKey: "uid")!
+            ])
+        }
+        else {
+            self.db.collection("users").document(self.uid).collection("trips").document(self.currentTripID!).updateData([
+                "upvotes": FieldValue.increment(Int64(-1))
+            ])
+            upvotesLabel.text = "\(Int(self.upvotesLabel.text!)! - 1)"
+            upvoteButton.setImage(#imageLiteral(resourceName: "like-2"), for: .normal)
+            upvoted = false
+            self.db.collection("users").document(self.uid).collection("trips").document(self.currentTripID!).collection("upvotes").document(UserDefaults.standard.string(forKey: "uid")!).delete()
         }
     }
     

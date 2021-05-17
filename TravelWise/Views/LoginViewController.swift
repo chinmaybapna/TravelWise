@@ -95,6 +95,7 @@ class LoginViewController: UIViewController {
                             }
                             else {
                                 print("success in logging in the user.")
+                                UserDefaults.standard.setValue(true, forKey: "isLoggedIn")
                                 UserDefaults.standard.setValue(Auth.auth().currentUser?.uid, forKey: "uid")
                                 self?.performSegue(withIdentifier: "login_successful", sender: nil)
                             }
