@@ -11,4 +11,5 @@ struct Trip {
     var name: String
     var tripImageURL: String
     var upvotes: Int
+    var tripID : String
 }

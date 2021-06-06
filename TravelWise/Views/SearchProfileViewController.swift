@@ -86,12 +86,12 @@ class SearchProfileViewController: UIViewController, UITableViewDataSource {
                 else {
                     for document in querySnapshot!.documents {
                         let data = document.data()
-                        
+                        let tripID = document.documentID
                         let tripName = data["tripName"] as! String
                         let tripProfileImageURL = data["tripProfileImageURL"] as! String
                         let upvotes = data["upvotes"] as! Int
                         
-                        let tempTrip = Trip(name: tripName, tripImageURL: tripProfileImageURL, upvotes: upvotes)
+                        let tempTrip = Trip(name: tripName, tripImageURL: tripProfileImageURL, upvotes: upvotes, tripID: tripID)
                         self.trips.append(tempTrip)
                     }
                     DispatchQueue.main.async {

@@ -662,6 +662,7 @@
                         <outlet property="tripsLabel" destination="QK4-bp-ozJ" id="S92-LK-AQb"/>
                         <segue destination="HMt-hc-fZh" kind="show" identifier="show_followers" id="hnE-R7-vLE"/>
                         <segue destination="HMt-hc-fZh" kind="show" identifier="show_following" id="qQJ-Fe-WpM"/>
+                        <segue destination="dBg-O4-ol5" kind="show" identifier="profile_trip_details" id="uN4-8a-MRX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SVP-Ha-uwn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1430,8 +1431,8 @@
     </designables>
     <inferredMetricsTieBreakers>
         <segue reference="k5w-i1-dXT"/>
-        <segue reference="qQJ-Fe-WpM"/>
-        <segue reference="WFQ-mt-phs"/>
+        <segue reference="hnE-R7-vLE"/>
+        <segue reference="uN4-8a-MRX"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="camera.fill" catalog="system" width="128" height="94"/>
