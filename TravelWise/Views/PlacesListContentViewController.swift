@@ -16,6 +16,7 @@ class PlacesListContentViewController: UIViewController, UITableViewDataSource, 
     @IBOutlet weak var tableView: UITableView!
     var placesVisited: [PlaceVisited] = []
     var currentTripID: String?
+    var uid: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +55,7 @@ class PlacesListContentViewController: UIViewController, UITableViewDataSource, 
             placeExpVC.placeName = placesVisited[tableView.indexPathForSelectedRow!.row].locationName
             placeExpVC.currentTripID = self.currentTripID
             placeExpVC.date = self.date
+            placeExpVC.uid = self.uid
         }
     }
 }

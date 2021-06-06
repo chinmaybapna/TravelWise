@@ -12,6 +12,8 @@ class PlaceExperienceViewController: UIViewController, EditExperienceDelegate {
     
     let db = Firestore.firestore()
     
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
     var uid: String?
     var placeID: String?
     var placeName: String?
@@ -24,6 +26,12 @@ class PlaceExperienceViewController: UIViewController, EditExperienceDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if(uid != UserDefaults.standard.string(forKey: "uid")!)
+        {
+            deleteButton.isHidden = true
+            editButton.isHidden = true
+        }
+        
         if let locationName = placeName {
             addressLabel.text = locationName
         }
@@ -31,7 +39,7 @@ class PlaceExperienceViewController: UIViewController, EditExperienceDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         if let placeID = placeID {
-            db.collection("users").document(UserDefaults.standard.string(forKey: "uid")!).collection("trips").document(self.currentTripID!).collection("placesVisited").document(placeID).getDocument { querySnapshot, error in
+            db.collection("users").document(self.uid!).collection("trips").document(self.currentTripID!).collection("placesVisited").document(placeID).getDocument { querySnapshot, error in
                 if error != nil {
                     print(error?.localizedDescription)
                 }
@@ -55,7 +63,7 @@ class PlaceExperienceViewController: UIViewController, EditExperienceDelegate {
     
     @IBAction func deleteButtonPressed(_ sender: Any) {
         if let placeID = placeID {
-            db.collection("users").document(UserDefaults.standard.string(forKey: "uid")!).collection("trips").document(self.currentTripID!).collection("placesVisited").document(placeID).delete { error in
+            db.collection("users").document(self.uid!).collection("trips").document(self.currentTripID!).collection("placesVisited").document(placeID).delete { error in
                 if error != nil {
                     print(error?.localizedDescription)
                 }

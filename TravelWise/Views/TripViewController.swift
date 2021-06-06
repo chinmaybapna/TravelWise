@@ -8,12 +8,13 @@
 import UIKit
 import Firebase
 import SDWebImage
+import FirebaseStorage
 
 class TripViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource {
     
     var upvoted = false
     
-    let uid = UserDefaults.standard.string(forKey: "uid")!
+    var uid = UserDefaults.standard.string(forKey: "uid")!
     let db = Firestore.firestore()
     var dates: [String] = []
     
@@ -22,6 +23,7 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     var tripName: String?
     var tripProfileImageURL: String?
     var currentTripID: String?
+//    var tripUserID: String?
     
     @IBOutlet weak var upvotesLabel: UILabel!
     @IBOutlet weak var upvoteButton: UIButton!
@@ -35,6 +37,16 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         self.navigationItem.hidesBackButton = true
         chooseTripProfileImageButton.layer.cornerRadius = 20
         
+        if(uid != UserDefaults.standard.string(forKey: "uid")!)
+        {
+            chooseTripProfileImageButton.isHidden = true
+            title = ""
+            self.navigationItem.rightBarButtonItem?.tintColor = .clear
+            self.navigationItem.rightBarButtonItem?.isEnabled = false
+            self.navigationItem.hidesBackButton = false
+
+        }
+        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -46,7 +58,9 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     override func viewWillAppear(_ animated: Bool) {
         self.dates = []
         getTripInfo {
-            self.db.collection("users").document(UserDefaults.standard.string(forKey: "uid")!).collection("trips").document(self.currentTripID!).collection("placesVisited").order(by: "timeStamp").getDocuments { (querySnapshot, error) in
+            
+            
+            self.db.collection("users").document(self.uid).collection("trips").document(self.currentTripID!).collection("placesVisited").order(by: "timeStamp").getDocuments { (querySnapshot, error) in
                 if error != nil {
                     print(error?.localizedDescription)
                 }
@@ -85,7 +99,7 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     func getTripInfo(getPlacesVisited: @escaping () -> Void) {
-        db.collection("users").document(UserDefaults.standard.string(forKey: "uid")!).collection("trips").whereField("isCurrentTrip", isEqualTo: true).getDocuments { [self] (querySnapshot, error) in
+        db.collection("users").document(self.uid).collection("trips").whereField("isCurrentTrip", isEqualTo: true).getDocuments { [self] (querySnapshot, error) in
             if error != nil {
                 print(error?.localizedDescription)
             }
@@ -99,7 +113,7 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                     self.tripProfileImageURL = data["tripProfileImageURL"] as? String
                     self.upvotesLabel.text = "\(data["upvotes"] as! Int)"
                     self.tripNameLabel.text = self.tripName
-                    self.tripProfileImageView.sd_setImage(with: URL(string: ""), placeholderImage: UIImage(named: "rowan-heuvel-U6t80TWJ1DM-unsplash"))
+                    self.tripProfileImageView.sd_setImage(with: URL(string: self.tripProfileImageURL!), placeholderImage: UIImage(named: "rowan-heuvel-U6t80TWJ1DM-unsplash"))
                 }
                 
                 getPlacesVisited()
@@ -156,6 +170,8 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
         actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action) in
             imagePickerController.sourceType = .camera
+            imagePickerController.cameraCaptureMode = .photo
+            imagePickerController.modalPresentationStyle = .fullScreen
             self.present(imagePickerController, animated: true, completion: nil)
         }))
         
@@ -169,11 +185,60 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         self.present(actionSheet, animated: true, completion: nil)
     }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
+    {
+        guard let coverImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else
+        {
+            // upload image from here
+            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+        }
+        guard let optimizedCoverImage = coverImage.jpegData(compressionQuality: 1) else {
+            print("error in covering it to jpegdata")
+            return
+        }
+//        tripProfileImageView.image = coverImage
+        uploadTripCoverImage(imageData: optimizedCoverImage)
+        picker.dismiss(animated: true, completion:nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController)
+    {
+        picker.dismiss(animated: true, completion:nil)
+    }
+    
+    func uploadTripCoverImage(imageData: Data)
+        {
+            let storageReference = Storage.storage().reference()
+            let coverImageRef = storageReference.child("trips").child(uid).child("\(String(describing: currentTripID))-tripCoverImage.jpg")
+            let uploadMetaData = StorageMetadata()
+            uploadMetaData.contentType = "image/jpeg"
+            coverImageRef.putData(imageData, metadata: uploadMetaData) { (uploadedImageMeta, error) in
+                if error != nil
+                {
+                    print("Error took place \(String(describing: error?.localizedDescription))")
+                    return
+                } else {
+                    self.tripProfileImageView.image = UIImage(data: imageData)
+                    coverImageRef.downloadURL{ (url, error)  in
+                        guard let downloadURL = url else {
+                            print(error?.localizedDescription)
+                            return
+                        }
+                    self.db.collection("users").document(self.uid).collection("trips").document(self.currentTripID!).updateData([
+                        "tripProfileImageURL": "\(downloadURL)"
+                    ])
+
+                    print("Meta data of uploaded image \(String(describing: uploadedImageMeta))")
+                }
+            }
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "show_places_visited") {
             let placesVisitedVC = segue.destination as! PlacesVisitedViewController
             placesVisitedVC.date = dates[tableView.indexPathForSelectedRow!.row]
-            
+            placesVisitedVC.uid = self.uid
 //            let placesListContentVC = PlacesListContentViewController()
 //            placesListContentVC.date = dates[tableView.indexPathForSelectedRow!.row]
         }

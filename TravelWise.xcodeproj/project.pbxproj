@@ -11,6 +11,7 @@
 		13999C2C2639E9D5000FCF84 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13999C2A2639E9D5000FCF84 /* HomeTableViewCell.swift */; };
 		13999C2D2639E9D5000FCF84 /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13999C2B2639E9D5000FCF84 /* HomeTableViewCell.xib */; };
 		13999C31263AAE80000FCF84 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13999C30263AAE80000FCF84 /* ProfileViewController.swift */; };
+		13C0A3AE266BD137002C6953 /* HomeTrips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C0A3AD266BD137002C6953 /* HomeTrips.swift */; };
 		8225D2D526481DEA00A9A7CB /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8225D2D326481DEA00A9A7CB /* ProfileTableViewCell.swift */; };
 		8225D2D626481DEA00A9A7CB /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8225D2D426481DEA00A9A7CB /* ProfileTableViewCell.xib */; };
 		8225D2D8264834A600A9A7CB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8225D2D7264834A500A9A7CB /* SearchViewController.swift */; };
@@ -52,6 +53,7 @@
 		13999C2A2639E9D5000FCF84 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		13999C2B2639E9D5000FCF84 /* HomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
 		13999C30263AAE80000FCF84 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		13C0A3AD266BD137002C6953 /* HomeTrips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTrips.swift; sourceTree = "<group>"; };
 		8225D2D326481DEA00A9A7CB /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		8225D2D426481DEA00A9A7CB /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
 		8225D2D7264834A500A9A7CB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				8225D2D926483CAD00A9A7CB /* User.swift */,
 				8225D2ED264A6A0500A9A7CB /* PlaceVisited.swift */,
 				8225D2E126491F3000A9A7CB /* Trip.swift */,
+				13C0A3AD266BD137002C6953 /* HomeTrips.swift */,
 			);
 			path = Modals;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				823A743E26328FA500D22753 /* MapViewController.swift in Sources */,
 				13999C31263AAE80000FCF84 /* ProfileViewController.swift in Sources */,
 				8225D2E526495BB800A9A7CB /* FollowersFollowingTableViewCell.swift in Sources */,
+				13C0A3AE266BD137002C6953 /* HomeTrips.swift in Sources */,
 				8225D2DD26483E3600A9A7CB /* PeopleSearchTableViewCell.swift in Sources */,
 				82A6916F26243078002731C6 /* RegistrationDetailsViewController.swift in Sources */,
 				8225D2DA26483CAD00A9A7CB /* User.swift in Sources */,

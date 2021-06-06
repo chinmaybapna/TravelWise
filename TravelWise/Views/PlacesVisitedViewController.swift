@@ -16,6 +16,8 @@ class PlacesVisitedViewController: UIViewController, FloatingPanelControllerDele
     var date: String?
     var currentTripID: String?
     
+    var uid = UserDefaults.standard.string(forKey: "uid")!
+
     var placesVisited: [PlaceVisited] = []
     
     let db = Firestore.firestore()
@@ -42,6 +44,7 @@ class PlacesVisitedViewController: UIViewController, FloatingPanelControllerDele
                     placesVisitedVC.date = self.date
                     placesVisitedVC.placesVisited = self.placesVisited
                     placesVisitedVC.currentTripID = self.currentTripID
+                    placesVisitedVC.uid = self.uid
                     self.fpc.set(contentViewController: placesVisitedVC)
                     self.fpc.addPanel(toParent: self)
                 }
@@ -88,7 +91,7 @@ class PlacesVisitedViewController: UIViewController, FloatingPanelControllerDele
     
     func fetchPlacesVisited(completion: @escaping () -> ()) {
         if let currentTripID = self.currentTripID, let date = self.date {
-            self.db.collection("users").document(UserDefaults.standard.string(forKey: "uid")!).collection("trips").document(currentTripID).collection("placesVisited").whereField("date", isEqualTo: date).getDocuments { [self] (querySnapshot, error) in
+            self.db.collection("users").document(self.uid).collection("trips").document(currentTripID).collection("placesVisited").whereField("date", isEqualTo: date).getDocuments { [self] (querySnapshot, error) in
                 if error != nil {
                     print(error?.localizedDescription)
                 }
@@ -113,7 +116,7 @@ class PlacesVisitedViewController: UIViewController, FloatingPanelControllerDele
     }
     
     func getCurrentTripID(completion: @escaping () -> ()) {
-        db.collection("users").document(UserDefaults.standard.string(forKey: "uid")!).collection("trips").whereField("isCurrentTrip", isEqualTo: true).getDocuments { [self] (querySnapshot, error) in
+        db.collection("users").document(self.uid).collection("trips").whereField("isCurrentTrip", isEqualTo: true).getDocuments { [self] (querySnapshot, error) in
             if error != nil {
                 print(error?.localizedDescription)
             }

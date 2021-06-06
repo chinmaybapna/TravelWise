@@ -140,6 +140,7 @@
                     <navigationItem key="navigationItem" title="Home" id="SPA-e2-Stn"/>
                     <connections>
                         <outlet property="homeTableView" destination="PxI-yV-RXO" id="1Tg-Wv-Xsi"/>
+                        <segue destination="dBg-O4-ol5" kind="show" identifier="view_trip_details" id="WFQ-mt-phs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Pg-P9-EyT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1326,7 +1327,9 @@
                     <navigationItem key="navigationItem" id="ndO-38-EBA"/>
                     <connections>
                         <outlet property="addressLabel" destination="M4V-SF-exP" id="V9E-2x-L89"/>
+                        <outlet property="deleteButton" destination="Nxg-rD-h9v" id="V3x-IJ-v3i"/>
                         <outlet property="descriptionLabel" destination="aE9-Wa-JX3" id="6r0-19-26D"/>
+                        <outlet property="editButton" destination="ddl-4P-eIa" id="daa-Kr-RnN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mxs-Jd-vRf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1414,9 +1417,21 @@
             <point key="canvasLocation" x="6671" y="3005"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="gVu-Ev-IMb">
+            <size key="intrinsicContentSize" width="120" height="20"/>
+        </designable>
+        <designable name="n5G-11-aHG">
+            <size key="intrinsicContentSize" width="120" height="20"/>
+        </designable>
+        <designable name="qfZ-ms-I2M">
+            <size key="intrinsicContentSize" width="120" height="20"/>
+        </designable>
+    </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="haO-Bk-Pf2"/>
+        <segue reference="k5w-i1-dXT"/>
         <segue reference="qQJ-Fe-WpM"/>
+        <segue reference="WFQ-mt-phs"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="camera.fill" catalog="system" width="128" height="94"/>

@@ -19,6 +19,8 @@ class MapViewController: UIViewController, FloatingPanelControllerDelegate {
     let regionInMeters: Double = 500
     var previousLocation: CLLocation?
     
+    var uid = UserDefaults.standard.string(forKey: "uid")!
+
     var currentLocation: String?
     var lat: Double?
     var long: Double?
@@ -44,7 +46,7 @@ class MapViewController: UIViewController, FloatingPanelControllerDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        db.collection("users").document(UserDefaults.standard.string(forKey: "uid")!).collection("trips").whereField("isCurrentTrip", isEqualTo: true).getDocuments { [self] (querySnapshot, error) in
+        db.collection("users").document(self.uid).collection("trips").whereField("isCurrentTrip", isEqualTo: true).getDocuments { [self] (querySnapshot, error) in
             if error != nil {
                 print(error?.localizedDescription)
             }
