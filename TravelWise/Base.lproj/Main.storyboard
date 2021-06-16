@@ -406,6 +406,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="tOy-lf-qfR" id="RZ6-Pb-9Ia"/>
+                        <outlet property="searchBar" destination="g5B-4I-ugY" id="JVb-Pn-nY8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aql-2l-tgQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -420,20 +421,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eiffel Tower" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8eh-n6-cQo">
-                                <rect key="frame" x="30" y="66" width="153.5" height="35"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eiffel Tower" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8eh-n6-cQo">
+                                <rect key="frame" x="30" y="66" width="354" height="31.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate this place" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cA2-gG-Lzm">
-                                <rect key="frame" x="30" y="126" width="354" height="20"/>
+                                <rect key="frame" x="30" y="122.5" width="354" height="20"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2p6-Mb-WUy">
-                                <rect key="frame" x="30" y="209" width="354" height="125"/>
+                                <rect key="frame" x="30" y="205.5" width="354" height="125"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="125" id="1kh-VU-acV"/>
@@ -443,7 +444,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gVu-Ev-IMb" customClass="CosmosView" customModule="Cosmos">
-                                <rect key="frame" x="30" y="154" width="354" height="20"/>
+                                <rect key="frame" x="30" y="150.5" width="354" height="20"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="VCX-46-ZeB"/>
@@ -464,6 +465,7 @@
                             <constraint firstItem="8eh-n6-cQo" firstAttribute="leading" secondItem="81q-31-flw" secondAttribute="leading" constant="30" id="K05-4B-DIF"/>
                             <constraint firstItem="2p6-Mb-WUy" firstAttribute="top" secondItem="gVu-Ev-IMb" secondAttribute="bottom" constant="35" id="MdE-7M-FwV"/>
                             <constraint firstItem="81q-31-flw" firstAttribute="trailing" secondItem="gVu-Ev-IMb" secondAttribute="trailing" constant="30" id="O5i-cX-Zym"/>
+                            <constraint firstItem="81q-31-flw" firstAttribute="trailing" secondItem="8eh-n6-cQo" secondAttribute="trailing" constant="30" id="R35-LG-76W"/>
                             <constraint firstItem="cA2-gG-Lzm" firstAttribute="leading" secondItem="81q-31-flw" secondAttribute="leading" constant="30" id="X59-rH-Paj"/>
                             <constraint firstItem="8eh-n6-cQo" firstAttribute="top" secondItem="81q-31-flw" secondAttribute="top" constant="22" id="Xwp-or-cZw"/>
                             <constraint firstItem="cA2-gG-Lzm" firstAttribute="top" secondItem="8eh-n6-cQo" secondAttribute="bottom" constant="25" id="h04-qL-9Xp"/>

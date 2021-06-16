@@ -11,13 +11,14 @@ import MapKit
 import CoreLocation
 import Firebase
 
-class MapViewController: UIViewController, FloatingPanelControllerDelegate {
+class MapViewController: UIViewController, FloatingPanelControllerDelegate, UISearchBarDelegate {
     
     var fpc: FloatingPanelController!
     @IBOutlet private var mapView: MKMapView!
     let locationManager = CLLocationManager()
     let regionInMeters: Double = 500
     var previousLocation: CLLocation?
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var uid = UserDefaults.standard.string(forKey: "uid")!
 
@@ -36,6 +37,7 @@ class MapViewController: UIViewController, FloatingPanelControllerDelegate {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
         mapView.delegate = self
+        searchBar.delegate = self
         checkLocationServices()
         
         fpc = FloatingPanelController()
@@ -137,6 +139,39 @@ class MapViewController: UIViewController, FloatingPanelControllerDelegate {
         self.lat = latitude
         self.long = longitude
         return CLLocation(latitude: latitude, longitude: longitude)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print("SEARCH BITCHES")
+        let searchRequest = MKLocalSearch.Request()
+        searchRequest.naturalLanguageQuery = searchBar.text
+        
+        let activeSearch = MKLocalSearch(request: searchRequest)
+        activeSearch.start { response, error in
+            if response == nil {
+                let alert = UIAlertController(title: "Invalid search", message: "Please enter a valid place name", preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
+            }
+            else {
+                let annotations = self.mapView.annotations
+                self.mapView.removeAnnotations(annotations)
+                
+                let lat = response?.boundingRegion.center.latitude
+                let long = response?.boundingRegion.center.longitude
+                
+                let annotation = MKPointAnnotation()
+                annotation.title = searchBar.text
+                annotation.coordinate = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+                self.mapView.addAnnotation(annotation)
+                
+                let coordinate = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+                let region = MKCoordinateRegion.init(center: coordinate, latitudinalMeters: self.regionInMeters, longitudinalMeters: self.regionInMeters)
+                self.mapView.setRegion(region, animated: true)
+            }
+        }
+        searchBar.endEditing(true)
     }
 }
 
