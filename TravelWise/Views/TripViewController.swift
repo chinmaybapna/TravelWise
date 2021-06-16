@@ -17,6 +17,7 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     var uid = UserDefaults.standard.string(forKey: "uid")!
     let db = Firestore.firestore()
     var dates: [String] = []
+    var showCurrentTrip = true
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -27,6 +28,7 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     @IBOutlet weak var upvotesLabel: UILabel!
     @IBOutlet weak var upvoteButton: UIButton!
+    @IBOutlet weak var endTripButton: UIButton!
     @IBOutlet weak var tripProfileImageView: UIImageView!
     @IBOutlet weak var tripNameLabel: UILabel!
     @IBOutlet weak var chooseTripProfileImageButton: UIButton!
@@ -36,7 +38,7 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
         self.navigationItem.hidesBackButton = true
         chooseTripProfileImageButton.layer.cornerRadius = 20
-        
+        endTripButton.layer.cornerRadius = 5
         if(uid != UserDefaults.standard.string(forKey: "uid")!)
         {
             chooseTripProfileImageButton.isHidden = true
@@ -44,6 +46,10 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             self.navigationItem.rightBarButtonItem?.tintColor = .clear
             self.navigationItem.rightBarButtonItem?.isEnabled = false
             self.navigationItem.hidesBackButton = false
+            
+            endTripButton.isHidden = true
+            endTripButton.tintColor = .clear
+            endTripButton.isEnabled = false
 
         }
         
@@ -99,24 +105,48 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     func getTripInfo(getPlacesVisited: @escaping () -> Void) {
-        db.collection("users").document(self.uid).collection("trips").whereField("isCurrentTrip", isEqualTo: true).getDocuments { [self] (querySnapshot, error) in
-            if error != nil {
-                print(error?.localizedDescription)
-            }
-            else {
-                for document in querySnapshot!.documents {
-                    let data = document.data()
-                    
-                    self.currentTripID = document.documentID
-                    print(self.currentTripID)
-                    self.tripName = data["tripName"] as? String
-                    self.tripProfileImageURL = data["tripProfileImageURL"] as? String
-                    self.upvotesLabel.text = "\(data["upvotes"] as! Int)"
-                    self.tripNameLabel.text = self.tripName
-                    self.tripProfileImageView.sd_setImage(with: URL(string: self.tripProfileImageURL!), placeholderImage: UIImage(named: "rowan-heuvel-U6t80TWJ1DM-unsplash"))
+        if(showCurrentTrip) {
+            db.collection("users").document(self.uid).collection("trips").whereField("isCurrentTrip", isEqualTo: true).getDocuments { [self] (querySnapshot, error) in
+                if error != nil {
+                    print(error?.localizedDescription)
                 }
-                
-                getPlacesVisited()
+                else {
+                    for document in querySnapshot!.documents {
+                        let data = document.data()
+                        
+                        self.currentTripID = document.documentID
+                        print(self.currentTripID)
+                        self.tripName = data["tripName"] as? String
+                        self.tripProfileImageURL = data["tripProfileImageURL"] as? String
+                        self.upvotesLabel.text = "\(data["upvotes"] as! Int)"
+                        self.tripNameLabel.text = self.tripName
+                        self.tripProfileImageView.sd_setImage(with: URL(string: self.tripProfileImageURL!), placeholderImage: UIImage(named: "rowan-heuvel-U6t80TWJ1DM-unsplash"))
+                    }
+                    
+                    getPlacesVisited()
+                }
+            }
+        }
+        else {
+            db.collection("users").document(self.uid).collection("trips").document(currentTripID!).getDocument { [self] (querySnapshot, error) in
+                if error != nil {
+                    print(error?.localizedDescription)
+                }
+                else {
+                    let data = querySnapshot!.data()
+                    
+                    if let data = data {
+                        self.currentTripID = querySnapshot!.documentID
+                        print(self.currentTripID)
+                        self.tripName = data["tripName"] as? String
+                        self.tripProfileImageURL = data["tripProfileImageURL"] as? String
+                        self.upvotesLabel.text = "\(data["upvotes"] as! Int)"
+                        self.tripNameLabel.text = self.tripName
+                        self.tripProfileImageView.sd_setImage(with: URL(string: self.tripProfileImageURL!), placeholderImage: UIImage(named: "rowan-heuvel-U6t80TWJ1DM-unsplash"))
+                        
+                        getPlacesVisited()
+                    }
+                }
             }
         }
     }
@@ -232,6 +262,13 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 }
             }
         }
+    }
+    
+    @IBAction func endTripButtonPressed(_ sender: Any) {
+        self.db.collection("users").document(self.uid).collection("trips").document(self.currentTripID!).updateData([
+            "isCurrentTrip": false
+        ])
+        navigationController?.popViewController(animated: false)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

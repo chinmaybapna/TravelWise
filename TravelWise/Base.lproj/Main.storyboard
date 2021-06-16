@@ -137,7 +137,9 @@
                             <constraint firstItem="PxI-yV-RXO" firstAttribute="bottom" secondItem="DQh-xh-Cu7" secondAttribute="bottom" id="slV-lf-jYi"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="SPA-e2-Stn"/>
+                    <navigationItem key="navigationItem" title="Home" id="SPA-e2-Stn">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="t2p-Yy-Pue"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="homeTableView" destination="PxI-yV-RXO" id="1Tg-Wv-Xsi"/>
                         <segue destination="dBg-O4-ol5" kind="show" identifier="view_trip_details" id="WFQ-mt-phs"/>
@@ -248,11 +250,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mNs-jO-nvm">
-                                <rect key="frame" x="0.0" y="383.5" width="414" height="275"/>
+                                <rect key="frame" x="0.0" y="383.5" width="414" height="339.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="275" id="Fll-Aw-heJ"/>
-                                </constraints>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8U6-Rs-8ri">
                                 <rect key="frame" x="364" y="218" width="40" height="40"/>
@@ -297,13 +296,29 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Im5-Pk-Qfg">
+                                <rect key="frame" x="20" y="743" width="374" height="45"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="BXi-4q-Ji8"/>
+                                </constraints>
+                                <state key="normal" title="END TRIP">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="endTripButtonPressed:" destination="dBg-O4-ol5" eventType="touchUpInside" id="qhj-Xc-Y1h"/>
+                                    <action selector="nextButtonTapped:" destination="Cq1-jN-8m8" eventType="touchUpInside" id="XEp-eB-LM1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hF2-DU-MTU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Im5-Pk-Qfg" firstAttribute="leading" secondItem="hF2-DU-MTU" secondAttribute="leading" constant="20" id="0If-rr-kbe"/>
                             <constraint firstItem="jV5-Kp-IvI" firstAttribute="top" secondItem="lvw-4x-oCF" secondAttribute="bottom" constant="25" id="1Uu-gF-KRe"/>
                             <constraint firstItem="mNs-jO-nvm" firstAttribute="top" secondItem="Ujg-q0-5Vk" secondAttribute="bottom" constant="25" id="2Mx-3G-yFC"/>
                             <constraint firstItem="mNs-jO-nvm" firstAttribute="trailing" secondItem="hF2-DU-MTU" secondAttribute="trailing" id="BJ0-A3-gbF"/>
+                            <constraint firstItem="hF2-DU-MTU" firstAttribute="bottom" secondItem="Im5-Pk-Qfg" secondAttribute="bottom" constant="25" id="C2V-nP-UnO"/>
                             <constraint firstItem="cJV-vG-GYf" firstAttribute="top" secondItem="hF2-DU-MTU" secondAttribute="top" id="FDr-69-ddF"/>
                             <constraint firstItem="lvw-4x-oCF" firstAttribute="top" secondItem="cJV-vG-GYf" secondAttribute="bottom" constant="20" id="Gq1-Hq-ctO"/>
                             <constraint firstItem="Ujg-q0-5Vk" firstAttribute="top" secondItem="lvw-4x-oCF" secondAttribute="bottom" constant="20" id="Hja-5W-UbM"/>
@@ -313,6 +328,8 @@
                             <constraint firstItem="hF2-DU-MTU" firstAttribute="trailing" secondItem="lvw-4x-oCF" secondAttribute="trailing" constant="20" id="WFA-Va-mVF"/>
                             <constraint firstItem="Ujg-q0-5Vk" firstAttribute="leading" secondItem="hF2-DU-MTU" secondAttribute="leading" constant="20" id="aV0-2z-AlT"/>
                             <constraint firstItem="cJV-vG-GYf" firstAttribute="leading" secondItem="hF2-DU-MTU" secondAttribute="leading" id="b6f-Zk-lvJ"/>
+                            <constraint firstItem="hF2-DU-MTU" firstAttribute="trailing" secondItem="Im5-Pk-Qfg" secondAttribute="trailing" constant="20" id="dFs-73-FqG"/>
+                            <constraint firstItem="Im5-Pk-Qfg" firstAttribute="top" secondItem="mNs-jO-nvm" secondAttribute="bottom" constant="20" id="l6x-6m-bgO"/>
                             <constraint firstItem="lvw-4x-oCF" firstAttribute="top" secondItem="8U6-Rs-8ri" secondAttribute="bottom" constant="30" id="laH-bX-GIb"/>
                             <constraint firstItem="ey6-l9-Vyd" firstAttribute="top" secondItem="lvw-4x-oCF" secondAttribute="bottom" constant="25" id="q2e-V3-aGn"/>
                             <constraint firstItem="hF2-DU-MTU" firstAttribute="trailing" secondItem="8U6-Rs-8ri" secondAttribute="trailing" constant="10" id="siN-tx-6T7"/>
@@ -321,6 +338,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Current Trip" id="qEV-W9-uYH">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="zQ9-ha-o8q"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ClF-gs-gpH">
                             <connections>
                                 <segue destination="jLm-5Y-Lo2" kind="show" id="5t0-Q1-gWN"/>
@@ -329,6 +347,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="chooseTripProfileImageButton" destination="8U6-Rs-8ri" id="eOe-WU-X4I"/>
+                        <outlet property="endTripButton" destination="Im5-Pk-Qfg" id="rsg-fs-eRu"/>
                         <outlet property="tableView" destination="mNs-jO-nvm" id="hDw-Hf-lOI"/>
                         <outlet property="tripNameLabel" destination="lvw-4x-oCF" id="qBF-up-hGi"/>
                         <outlet property="tripProfileImageView" destination="cJV-vG-GYf" id="XD3-5c-tFS"/>
@@ -504,7 +523,9 @@
                             <constraint firstItem="lMu-PE-qth" firstAttribute="leading" secondItem="WMq-wX-n4a" secondAttribute="leading" id="xbO-9L-cFd"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Search" id="YPm-JX-j7B"/>
+                    <navigationItem key="navigationItem" title="Search" id="YPm-JX-j7B">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="IB4-LX-hcr"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="476-cu-7bK" id="Wje-N5-gBS"/>
                         <outlet property="segments" destination="lMu-PE-qth" id="4ED-SV-Lbg"/>
@@ -651,7 +672,9 @@
                             <constraint firstItem="17h-uw-kJN" firstAttribute="leading" secondItem="DDW-uV-Hps" secondAttribute="trailing" constant="20" id="zVS-QY-Pcc"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Profile" id="lRS-Am-Eth"/>
+                    <navigationItem key="navigationItem" title="Profile" id="lRS-Am-Eth">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="aWk-LX-Nw7"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="followersLabel" destination="mX5-eS-CWX" id="kRd-Dh-5Vr"/>
                         <outlet property="followingLabel" destination="70o-Ki-HfM" id="IQE-Sy-ktg"/>

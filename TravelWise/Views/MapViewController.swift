@@ -34,7 +34,7 @@ class MapViewController: UIViewController, FloatingPanelControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
         mapView.delegate = self
         checkLocationServices()
         
@@ -155,7 +155,7 @@ extension MapViewController: MKMapViewDelegate {
         
         guard let previousLocation = self.previousLocation else { return }
         
-        guard center.distance(from: previousLocation) > 50 else { return }
+//        guard center.distance(from: previousLocation) > 50 else { return }
         self.previousLocation = center
         
         geoCoder.reverseGeocodeLocation(center) { [weak self] (placemarks, error) in

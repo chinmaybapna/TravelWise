@@ -137,6 +137,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
             print(trips[homeTableView.indexPathForSelectedRow!.row].tripId)
             tripViewVC.uid = trips[homeTableView.indexPathForSelectedRow!.row].userId
             print(trips[homeTableView.indexPathForSelectedRow!.row].userId)
+            tripViewVC.showCurrentTrip = false
         }
     }
     

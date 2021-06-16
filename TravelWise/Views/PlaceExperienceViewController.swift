@@ -38,8 +38,8 @@ class PlaceExperienceViewController: UIViewController, EditExperienceDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if let placeID = placeID {
-            db.collection("users").document(self.uid!).collection("trips").document(self.currentTripID!).collection("placesVisited").document(placeID).getDocument { querySnapshot, error in
+        if let placeID = placeID, let uid = uid {
+            db.collection("users").document(uid).collection("trips").document(self.currentTripID!).collection("placesVisited").document(placeID).getDocument { querySnapshot, error in
                 if error != nil {
                     print(error?.localizedDescription)
                 }

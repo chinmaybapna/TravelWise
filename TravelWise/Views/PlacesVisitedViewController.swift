@@ -24,7 +24,7 @@ class PlacesVisitedViewController: UIViewController, FloatingPanelControllerDele
 
     var fpc: FloatingPanelController!
     
-    let distanceSpan: CLLocationDistance = 5000
+    var distanceSpan: CLLocationDistance = 5000
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,17 +36,19 @@ class PlacesVisitedViewController: UIViewController, FloatingPanelControllerDele
         placesVisited = []
         getCurrentTripID {
             self.fetchPlacesVisited {
-                self.createAnnotations {
-                    self.zoomLevel(location: self.middlePointOfListMarkers(placesList: self.placesVisited))
-                    self.fpc = FloatingPanelController()
-                    self.fpc.delegate = self
-                    let placesVisitedVC = self.storyboard?.instantiateViewController(identifier: "places_list_vc") as! PlacesListContentViewController
-                    placesVisitedVC.date = self.date
-                    placesVisitedVC.placesVisited = self.placesVisited
-                    placesVisitedVC.currentTripID = self.currentTripID
-                    placesVisitedVC.uid = self.uid
-                    self.fpc.set(contentViewController: placesVisitedVC)
-                    self.fpc.addPanel(toParent: self)
+                self.setDistanceSpan {
+                    self.createAnnotations {
+                        self.zoomLevel(location: self.middlePointOfListMarkers(placesList: self.placesVisited))
+                        self.fpc = FloatingPanelController()
+                        self.fpc.delegate = self
+                        let placesVisitedVC = self.storyboard?.instantiateViewController(identifier: "places_list_vc") as! PlacesListContentViewController
+                        placesVisitedVC.date = self.date
+                        placesVisitedVC.placesVisited = self.placesVisited
+                        placesVisitedVC.currentTripID = self.currentTripID
+                        placesVisitedVC.uid = self.uid
+                        self.fpc.set(contentViewController: placesVisitedVC)
+                        self.fpc.addPanel(toParent: self)
+                    }
                 }
             }
         }
@@ -56,18 +58,21 @@ class PlacesVisitedViewController: UIViewController, FloatingPanelControllerDele
         placesVisited = []
         getCurrentTripID {
             self.fetchPlacesVisited {
-                if(self.placesVisited.count == 0) {
-                    self.navigationController?.popViewController(animated: true)
-                }
-                else {
-                    self.createAnnotations {
-                        self.zoomLevel(location: self.middlePointOfListMarkers(placesList: self.placesVisited))
-                        let placesVisitedVC = self.storyboard?.instantiateViewController(identifier: "places_list_vc") as! PlacesListContentViewController
-                        placesVisitedVC.date = self.date
-                        placesVisitedVC.placesVisited = self.placesVisited
-                        placesVisitedVC.currentTripID = self.currentTripID
-                        self.fpc.set(contentViewController: placesVisitedVC)
-                        self.fpc.addPanel(toParent: self)
+                self.setDistanceSpan {
+                    if(self.placesVisited.count == 0) {
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                    else {
+                        self.createAnnotations {
+                            self.zoomLevel(location: self.middlePointOfListMarkers(placesList: self.placesVisited))
+                            let placesVisitedVC = self.storyboard?.instantiateViewController(identifier: "places_list_vc") as! PlacesListContentViewController
+                            placesVisitedVC.date = self.date
+                            placesVisitedVC.placesVisited = self.placesVisited
+                            placesVisitedVC.currentTripID = self.currentTripID
+                            placesVisitedVC.uid = self.uid
+                            self.fpc.set(contentViewController: placesVisitedVC)
+                            self.fpc.addPanel(toParent: self)
+                        }
                     }
                 }
             }
@@ -168,5 +173,26 @@ class PlacesVisitedViewController: UIViewController, FloatingPanelControllerDele
 
         return result
 
+    }
+    
+    func setDistanceSpan(completion: @escaping () -> ()) {
+        if placesVisited.count <= 1 {
+            self.distanceSpan = 3000
+        }
+        else {
+            var max: Double = 0
+            for i in 0...placesVisited.count-2 {
+                for j in i+1...placesVisited.count-1 {
+                    let coordinate1 = CLLocation(latitude: placesVisited[i].lat, longitude: placesVisited[i].long)
+                    let coordinate2 = CLLocation(latitude: placesVisited[j].lat, longitude: placesVisited[j].long)
+                    let dist = coordinate1.distance(from: coordinate2)
+                    if dist > max {
+                        max = dist
+                    }
+                }
+            }
+            self.distanceSpan = max + 0.35*max
+        }
+        completion()
     }
 }
