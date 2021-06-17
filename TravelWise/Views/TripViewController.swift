@@ -24,6 +24,7 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     var tripName: String?
     var tripProfileImageURL: String?
     var currentTripID: String?
+    var delete = false
 //    var tripUserID: String?
     
     @IBOutlet weak var upvotesLabel: UILabel!
@@ -52,12 +53,19 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         {
             chooseTripProfileImageButton.isHidden = true
             title = ""
-            self.navigationItem.rightBarButtonItem?.tintColor = .clear
-            self.navigationItem.rightBarButtonItem?.isEnabled = false
-            self.navigationItem.hidesBackButton = false
+            self.navigationItem.rightBarButtonItem = nil
+            navigationItem.hidesBackButton = false
             
             endTripButton.isHidden = true
             endTripButton.isEnabled = false
+        }
+        
+        if(uid == UserDefaults.standard.string(forKey: "uid")! && !showCurrentTrip) {
+            let deleteBarButtonItem = UIBarButtonItem(title: "Delete", style: .plain, target: self, action: #selector(deleteTrip))
+            deleteBarButtonItem.tintColor = .red
+            self.navigationItem.rightBarButtonItem  = deleteBarButtonItem
+            navigationItem.hidesBackButton = false
+            self.delete = true
         }
         
         tableView.delegate = self
@@ -66,6 +74,16 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         tableView.register(UINib(nibName: "DayTableViewCell", bundle: nil), forCellReuseIdentifier: "day_cell")
         
         self.tableView.tableFooterView = UIView()
+    }
+    
+    @objc func deleteTrip() {
+        self.db.collection("users").document(self.uid).collection("trips").document(self.currentTripID!).delete { error in
+            if(error != nil) {
+                print("erorr in deleting the document")
+                return
+            }
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
