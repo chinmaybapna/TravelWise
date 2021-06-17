@@ -13,4 +13,5 @@ target 'TravelWise' do
   pod 'FloatingPanel'
   pod 'Cosmos'
   pod 'IQKeyboardManagerSwift'
+  pod 'RangeSeekSlider'
 end

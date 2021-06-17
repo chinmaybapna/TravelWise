@@ -27,19 +27,28 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
 //    var tripUserID: String?
     
     @IBOutlet weak var upvotesLabel: UILabel!
+    @IBOutlet weak var upvotesText: UILabel!
     @IBOutlet weak var upvoteButton: UIButton!
     @IBOutlet weak var endTripButton: UIButton!
     @IBOutlet weak var tripProfileImageView: UIImageView!
     @IBOutlet weak var tripNameLabel: UILabel!
     @IBOutlet weak var chooseTripProfileImageButton: UIButton!
+    @IBOutlet weak var expenseInfoLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if(showCurrentTrip) {
+            upvotesLabel.removeFromSuperview()
+            upvoteButton.removeFromSuperview()
+            upvotesText.removeFromSuperview()
+            expenseInfoLabel.removeFromSuperview()
+            tableView.topAnchor.constraint(equalTo: tripNameLabel.bottomAnchor, constant: 30).isActive = true
+        }
         
         self.navigationItem.hidesBackButton = true
         chooseTripProfileImageButton.layer.cornerRadius = 20
         endTripButton.layer.cornerRadius = 5
-        if(uid != UserDefaults.standard.string(forKey: "uid")!)
+        if(uid != UserDefaults.standard.string(forKey: "uid")! || !showCurrentTrip)
         {
             chooseTripProfileImageButton.isHidden = true
             title = ""
@@ -48,9 +57,7 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             self.navigationItem.hidesBackButton = false
             
             endTripButton.isHidden = true
-            endTripButton.tintColor = .clear
             endTripButton.isEnabled = false
-
         }
         
         tableView.delegate = self
@@ -64,8 +71,6 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     override func viewWillAppear(_ animated: Bool) {
         self.dates = []
         getTripInfo {
-            
-            
             self.db.collection("users").document(self.uid).collection("trips").document(self.currentTripID!).collection("placesVisited").order(by: "timeStamp").getDocuments { (querySnapshot, error) in
                 if error != nil {
                     print(error?.localizedDescription)
@@ -118,7 +123,6 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                         print(self.currentTripID)
                         self.tripName = data["tripName"] as? String
                         self.tripProfileImageURL = data["tripProfileImageURL"] as? String
-                        self.upvotesLabel.text = "\(data["upvotes"] as! Int)"
                         self.tripNameLabel.text = self.tripName
                         self.tripProfileImageView.sd_setImage(with: URL(string: self.tripProfileImageURL!), placeholderImage: UIImage(named: "rowan-heuvel-U6t80TWJ1DM-unsplash"))
                     }
@@ -143,7 +147,12 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                         self.upvotesLabel.text = "\(data["upvotes"] as! Int)"
                         self.tripNameLabel.text = self.tripName
                         self.tripProfileImageView.sd_setImage(with: URL(string: self.tripProfileImageURL!), placeholderImage: UIImage(named: "rowan-heuvel-U6t80TWJ1DM-unsplash"))
-                        
+                        let minExpense = data["minExpenseValue"] as! Int
+                        let maxExpense = data["maxExpenseValue"] as! Int
+                        print(minExpense)
+                        print(maxExpense)
+                        expenseInfoLabel.text = "₹ \(minExpense) - ₹ \(maxExpense)"
+                        self.upvotesLabel.text = "\(data["upvotes"] as! Int)"
                         getPlacesVisited()
                     }
                 }
@@ -265,10 +274,7 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     @IBAction func endTripButtonPressed(_ sender: Any) {
-        self.db.collection("users").document(self.uid).collection("trips").document(self.currentTripID!).updateData([
-            "isCurrentTrip": false
-        ])
-        navigationController?.popViewController(animated: false)
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -276,8 +282,17 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             let placesVisitedVC = segue.destination as! PlacesVisitedViewController
             placesVisitedVC.date = dates[tableView.indexPathForSelectedRow!.row]
             placesVisitedVC.uid = self.uid
+            placesVisitedVC.showCurrentTrip = self.showCurrentTrip
+            placesVisitedVC.currentTripID = self.currentTripID
 //            let placesListContentVC = PlacesListContentViewController()
 //            placesListContentVC.date = dates[tableView.indexPathForSelectedRow!.row]
+        }
+        
+        if(segue.identifier == "end_trip") {
+            let endTripVC = segue.destination as! EndTripViewController
+            endTripVC.currentTripID = self.currentTripID
+            endTripVC.tripName = self.tripName
+            endTripVC.tripProfileImageURL = self.tripProfileImageURL
         }
     }
 }

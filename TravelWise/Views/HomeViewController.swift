@@ -67,6 +67,9 @@ class HomeViewController: UIViewController {
                                 for document in tripQuerySnapshot!.documents {
                                     let tripData = document.data()
                                     let tripId = document.documentID
+                                    let isCurrentTrip = tripData["isCurrentTrip"] as! Bool
+                                    let isPrivateTrip = tripData["privateTrip"] as! Bool
+                                    if( isCurrentTrip || isPrivateTrip ) { continue }
                                     let tripName = tripData["tripName"] as! String
                                     let tripProfileImageURL = tripData["tripProfileImageURL"] as! String
                                     let startDate = tripData["startDate"] as! String
@@ -134,9 +137,9 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         if(segue.identifier == "view_trip_details") {
             let tripViewVC = segue.destination as! TripViewController
             tripViewVC.currentTripID = trips[homeTableView.indexPathForSelectedRow!.row].tripId
-            print(trips[homeTableView.indexPathForSelectedRow!.row].tripId)
+//            print(trips[homeTableView.indexPathForSelectedRow!.row].tripId)
             tripViewVC.uid = trips[homeTableView.indexPathForSelectedRow!.row].userId
-            print(trips[homeTableView.indexPathForSelectedRow!.row].userId)
+//            print(trips[homeTableView.indexPathForSelectedRow!.row].userId)
             tripViewVC.showCurrentTrip = false
         }
     }

@@ -15,6 +15,7 @@ class PlacesVisitedViewController: UIViewController, FloatingPanelControllerDele
     @IBOutlet weak var mapView: MKMapView!
     var date: String?
     var currentTripID: String?
+    var showCurrentTrip = false
     
     var uid = UserDefaults.standard.string(forKey: "uid")!
 
@@ -34,21 +35,19 @@ class PlacesVisitedViewController: UIViewController, FloatingPanelControllerDele
     
     override func viewWillAppear(_ animated: Bool) {
         placesVisited = []
-        getCurrentTripID {
-            self.fetchPlacesVisited {
-                self.setDistanceSpan {
-                    self.createAnnotations {
-                        self.zoomLevel(location: self.middlePointOfListMarkers(placesList: self.placesVisited))
-                        self.fpc = FloatingPanelController()
-                        self.fpc.delegate = self
-                        let placesVisitedVC = self.storyboard?.instantiateViewController(identifier: "places_list_vc") as! PlacesListContentViewController
-                        placesVisitedVC.date = self.date
-                        placesVisitedVC.placesVisited = self.placesVisited
-                        placesVisitedVC.currentTripID = self.currentTripID
-                        placesVisitedVC.uid = self.uid
-                        self.fpc.set(contentViewController: placesVisitedVC)
-                        self.fpc.addPanel(toParent: self)
-                    }
+        self.fetchPlacesVisited {
+            self.setDistanceSpan {
+                self.createAnnotations {
+                    self.zoomLevel(location: self.middlePointOfListMarkers(placesList: self.placesVisited))
+                    self.fpc = FloatingPanelController()
+                    self.fpc.delegate = self
+                    let placesVisitedVC = self.storyboard?.instantiateViewController(identifier: "places_list_vc") as! PlacesListContentViewController
+                    placesVisitedVC.date = self.date
+                    placesVisitedVC.placesVisited = self.placesVisited
+                    placesVisitedVC.currentTripID = self.currentTripID
+                    placesVisitedVC.uid = self.uid
+                    self.fpc.set(contentViewController: placesVisitedVC)
+                    self.fpc.addPanel(toParent: self)
                 }
             }
         }
@@ -56,23 +55,21 @@ class PlacesVisitedViewController: UIViewController, FloatingPanelControllerDele
     
     @objc func reload() {
         placesVisited = []
-        getCurrentTripID {
-            self.fetchPlacesVisited {
-                self.setDistanceSpan {
-                    if(self.placesVisited.count == 0) {
-                        self.navigationController?.popViewController(animated: true)
-                    }
-                    else {
-                        self.createAnnotations {
-                            self.zoomLevel(location: self.middlePointOfListMarkers(placesList: self.placesVisited))
-                            let placesVisitedVC = self.storyboard?.instantiateViewController(identifier: "places_list_vc") as! PlacesListContentViewController
-                            placesVisitedVC.date = self.date
-                            placesVisitedVC.placesVisited = self.placesVisited
-                            placesVisitedVC.currentTripID = self.currentTripID
-                            placesVisitedVC.uid = self.uid
-                            self.fpc.set(contentViewController: placesVisitedVC)
-                            self.fpc.addPanel(toParent: self)
-                        }
+        self.fetchPlacesVisited {
+            self.setDistanceSpan {
+                if(self.placesVisited.count == 0) {
+                    self.navigationController?.popViewController(animated: true)
+                }
+                else {
+                    self.createAnnotations {
+                        self.zoomLevel(location: self.middlePointOfListMarkers(placesList: self.placesVisited))
+                        let placesVisitedVC = self.storyboard?.instantiateViewController(identifier: "places_list_vc") as! PlacesListContentViewController
+                        placesVisitedVC.date = self.date
+                        placesVisitedVC.placesVisited = self.placesVisited
+                        placesVisitedVC.currentTripID = self.currentTripID
+                        placesVisitedVC.uid = self.uid
+                        self.fpc.set(contentViewController: placesVisitedVC)
+                        self.fpc.addPanel(toParent: self)
                     }
                 }
             }
@@ -121,19 +118,20 @@ class PlacesVisitedViewController: UIViewController, FloatingPanelControllerDele
     }
     
     func getCurrentTripID(completion: @escaping () -> ()) {
-        db.collection("users").document(self.uid).collection("trips").whereField("isCurrentTrip", isEqualTo: true).getDocuments { [self] (querySnapshot, error) in
-            if error != nil {
-                print(error?.localizedDescription)
-            }
-            else {
-                for document in querySnapshot!.documents {
-                    self.currentTripID = document.documentID
-                    print(self.currentTripID)
+        if(showCurrentTrip) {
+            db.collection("users").document(self.uid).collection("trips").whereField("isCurrentTrip", isEqualTo: true).getDocuments { [self] (querySnapshot, error) in
+                if error != nil {
+                    print(error?.localizedDescription)
                 }
-                
-                completion()
+                else {
+                    for document in querySnapshot!.documents {
+                        self.currentTripID = document.documentID
+                        print(self.currentTripID)
+                    }
+                }
             }
         }
+        completion()
     }
     
     func degreeToRadian(angle:CLLocationDegrees) -> CGFloat {

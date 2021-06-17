@@ -75,6 +75,7 @@ class ProfileViewController : UIViewController, UITableViewDataSource, UITableVi
             else {
                 for document in querySnapshot!.documents {
                     let data = document.data()
+                    if(data["isCurrentTrip"] as! Bool) { continue }
                     let tripID = document.documentID
                     let tripName = data["tripName"] as! String
                     let tripProfileImageURL = data["tripProfileImageURL"] as! String
@@ -142,6 +143,7 @@ class ProfileViewController : UIViewController, UITableViewDataSource, UITableVi
             tripViewVC.currentTripID = trips[tableView.indexPathForSelectedRow!.row].tripID
 //            print(trips[homeTableView.indexPathForSelectedRow!.row].tripID)
             tripViewVC.uid = self.uid
+            tripViewVC.showCurrentTrip = false
 //            print(trips[homeTableView.indexPathForSelectedRow!.row].userId)
         }
     }
