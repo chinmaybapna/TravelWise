@@ -311,23 +311,36 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share this trip with others ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xd8-ne-CCq">
-                                <rect key="frame" x="20" y="514.5" width="221" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share this trip with others" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xd8-ne-CCq">
+                                <rect key="frame" x="20" y="679.5" width="206" height="21"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="67o-1s-tUR">
+                                <rect key="frame" x="20" y="504.5" width="374" height="125"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="125" id="fUi-mB-j23"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="fill" contentVerticalAlignment="bottom" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eYZ-d6-aYn">
-                                <rect key="frame" x="345" y="510" width="51" height="31"/>
+                                <rect key="frame" x="345" y="675" width="51" height="31"/>
                             </switch>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Yqv-k1-yyb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Xd8-ne-CCq" firstAttribute="top" secondItem="67o-1s-tUR" secondAttribute="bottom" constant="50" id="81I-WO-wds"/>
                             <constraint firstItem="7MJ-0n-Mjh" firstAttribute="top" secondItem="4fE-sq-vAd" secondAttribute="bottom" constant="20" id="B8S-CU-rqw"/>
+                            <constraint firstItem="67o-1s-tUR" firstAttribute="leading" secondItem="Yqv-k1-yyb" secondAttribute="leading" constant="20" id="Ev0-a6-5zF"/>
                             <constraint firstItem="4fE-sq-vAd" firstAttribute="leading" secondItem="Yqv-k1-yyb" secondAttribute="leading" id="JAN-AH-3Tc"/>
                             <constraint firstItem="Yqv-k1-yyb" firstAttribute="trailing" secondItem="eYZ-d6-aYn" secondAttribute="trailing" constant="20" id="JuK-nr-dqT"/>
                             <constraint firstItem="7MJ-0n-Mjh" firstAttribute="leading" secondItem="Yqv-k1-yyb" secondAttribute="leading" constant="20" id="KqN-Hy-ypq"/>
+                            <constraint firstItem="67o-1s-tUR" firstAttribute="top" secondItem="dDe-5L-IK7" secondAttribute="bottom" constant="70" id="Nd7-Tk-MON"/>
                             <constraint firstItem="Yqv-k1-yyb" firstAttribute="trailing" secondItem="dDe-5L-IK7" secondAttribute="trailing" constant="10" id="P8I-5x-Tlp"/>
                             <constraint firstItem="Xd8-ne-CCq" firstAttribute="leading" secondItem="Yqv-k1-yyb" secondAttribute="leading" constant="20" id="UTX-xd-S7J"/>
                             <constraint firstItem="Yqv-k1-yyb" firstAttribute="trailing" secondItem="7MJ-0n-Mjh" secondAttribute="trailing" constant="20" id="Wgj-Gz-fAD"/>
@@ -335,9 +348,9 @@
                             <constraint firstItem="ma9-1e-gn2" firstAttribute="top" secondItem="7MJ-0n-Mjh" secondAttribute="bottom" constant="50" id="fVM-oG-71o"/>
                             <constraint firstItem="dDe-5L-IK7" firstAttribute="top" secondItem="ma9-1e-gn2" secondAttribute="bottom" constant="20" id="gX6-dR-u4Y"/>
                             <constraint firstItem="ma9-1e-gn2" firstAttribute="leading" secondItem="Yqv-k1-yyb" secondAttribute="leading" constant="20" id="jGc-Cx-S2B"/>
-                            <constraint firstItem="eYZ-d6-aYn" firstAttribute="top" secondItem="dDe-5L-IK7" secondAttribute="bottom" constant="75.5" id="kCN-Lf-ZPi"/>
+                            <constraint firstItem="Yqv-k1-yyb" firstAttribute="trailing" secondItem="67o-1s-tUR" secondAttribute="trailing" constant="20" id="kW1-26-aRJ"/>
                             <constraint firstItem="4fE-sq-vAd" firstAttribute="trailing" secondItem="Yqv-k1-yyb" secondAttribute="trailing" id="lhL-jJ-Eme"/>
-                            <constraint firstItem="Xd8-ne-CCq" firstAttribute="top" secondItem="dDe-5L-IK7" secondAttribute="bottom" constant="80" id="omB-v8-cL7"/>
+                            <constraint firstItem="eYZ-d6-aYn" firstAttribute="top" secondItem="67o-1s-tUR" secondAttribute="bottom" constant="45.5" id="qnt-0w-Gze"/>
                             <constraint firstItem="4fE-sq-vAd" firstAttribute="top" secondItem="Yqv-k1-yyb" secondAttribute="top" id="vWO-9G-ye5"/>
                             <constraint firstItem="Yqv-k1-yyb" firstAttribute="trailing" secondItem="ma9-1e-gn2" secondAttribute="trailing" constant="20" id="wtl-bn-vry"/>
                         </constraints>
@@ -350,6 +363,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="hashtagTextView" destination="67o-1s-tUR" id="Va3-YZ-SLL"/>
                         <outlet property="rangeSlider" destination="dDe-5L-IK7" id="fB7-qd-Z18"/>
                         <outlet property="shareTrip" destination="eYZ-d6-aYn" id="21A-Q8-WZ1"/>
                         <outlet property="tripNameLabel" destination="7MJ-0n-Mjh" id="Nbh-EN-rmy"/>
