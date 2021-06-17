@@ -67,9 +67,8 @@ class HomeViewController: UIViewController {
                                 for document in tripQuerySnapshot!.documents {
                                     let tripData = document.data()
                                     let tripId = document.documentID
-                                    let isCurrentTrip = tripData["isCurrentTrip"] as! Bool
-                                    let isPrivateTrip = tripData["privateTrip"] as! Bool
-                                    if( isCurrentTrip || isPrivateTrip ) { continue }
+                                    
+                                    if( tripData["isCurrentTrip"] as! Bool || tripData["privateTrip"] as! Bool ) { continue }
                                     let tripName = tripData["tripName"] as! String
                                     let tripProfileImageURL = tripData["tripProfileImageURL"] as! String
                                     let startDate = tripData["startDate"] as! String

@@ -86,6 +86,7 @@ class SearchProfileViewController: UIViewController, UITableViewDataSource {
                 else {
                     for document in querySnapshot!.documents {
                         let data = document.data()
+                        if( data["isCurrentTrip"] as! Bool || data["privateTrip"] as! Bool ) { continue }
                         let tripID = document.documentID
                         let tripName = data["tripName"] as! String
                         let tripProfileImageURL = data["tripProfileImageURL"] as! String

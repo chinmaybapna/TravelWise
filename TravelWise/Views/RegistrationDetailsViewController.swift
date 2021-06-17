@@ -87,7 +87,7 @@ class RegistrationDetailsViewController: UIViewController {
         dobTextField.text = dateFormatter.string(from: datePicker.date)
     }
     
-    @IBAction func registerButtonTapped(_ sender: Any) {
+    func registerUser(completion: @escaping () -> Void) {
         Auth.auth().createUser(withEmail: UserDefaults.standard.string(forKey: "email")!, password: UserDefaults.standard.string(forKey: "password")!) { (authResult, error) in
             if error != nil {
                 print("registration failed.")
@@ -114,6 +114,24 @@ class RegistrationDetailsViewController: UIViewController {
                         "numberOfTrips": 0,
                         "profileImageURL": ""
                     ])
+                }
+                completion()
+            }
+        }
+    }
+    
+    @IBAction func registerButtonTapped(_ sender: Any) {
+        registerUser {
+            Auth.auth().signIn(withEmail: UserDefaults.standard.string(forKey: "email")!, password: UserDefaults.standard.string(forKey: "password")!) { [weak self] authResult, error in
+                guard self != nil else { return }
+                if error != nil {
+                    print("login failed.")
+                }
+                else {
+                    print("success in logging in the user.")
+                    UserDefaults.standard.setValue(true, forKey: "isLoggedIn")
+                    UserDefaults.standard.setValue(Auth.auth().currentUser?.uid, forKey: "uid")
+                    self?.performSegue(withIdentifier: "registration_successful", sender: nil)
                 }
             }
         }

@@ -1073,6 +1073,7 @@
                         <outlet property="hometownTextField" destination="RGE-9U-MtI" id="AVJ-17-Shi"/>
                         <outlet property="nameTextField" destination="SAQ-pd-PBu" id="GFk-9L-ETu"/>
                         <outlet property="registerButton" destination="fDa-Tg-pah" id="Enn-Bb-0q9"/>
+                        <segue destination="0xD-CW-cca" kind="modal" identifier="registration_successful" modalPresentationStyle="fullScreen" id="4Ql-gj-ml2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R1I-08-1MN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1599,6 +1600,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="haO-Bk-Pf2"/>
+        <segue reference="aaR-dP-ZBy"/>
         <segue reference="hnE-R7-vLE"/>
         <segue reference="uN4-8a-MRX"/>
     </inferredMetricsTieBreakers>

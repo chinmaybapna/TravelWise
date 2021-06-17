@@ -35,9 +35,9 @@ class EndTripViewController: UIViewController {
     }
     
     @IBAction func finishButtonPressed(_ sender: Any) {
-        var privateTrip = true
+        var privateTrip = false
         if !shareTrip.isOn {
-            privateTrip = false
+            privateTrip = true
         }
         self.db.collection("users").document(self.uid!).collection("trips").document(self.currentTripID!).setData([
             "isCurrentTrip": false,
