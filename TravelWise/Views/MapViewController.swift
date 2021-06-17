@@ -33,6 +33,9 @@ class MapViewController: UIViewController, FloatingPanelControllerDelegate, UISe
     let date = Date()
     let formatter = DateFormatter()
     
+    var desc: String = ""
+    var rating: Int = 5
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
@@ -45,7 +48,36 @@ class MapViewController: UIViewController, FloatingPanelControllerDelegate, UISe
         let contentVC = storyboard?.instantiateViewController(identifier: "content_vc") as! ContentViewController
         fpc.set(contentViewController: contentVC)
         fpc.addPanel(toParent: self)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(setDescription),
+                                               name: Notification.Name("DescriptionChanged"),
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(setRating),
+                                               name: Notification.Name("RatingChanged"),
+                                               object: nil)
     }
+    
+    @objc func setDescription(notification: NSNotification) {
+        if let dict = notification.object as? NSDictionary {
+            if let desc = dict["description"] as? String {
+                print(desc)
+                self.desc = desc
+            }
+        }
+    }
+
+    @objc func setRating(notification: NSNotification) {
+        if let dict = notification.object as? NSDictionary {
+            if let rating = dict["rating"] as? Int {
+                print(rating)
+                self.rating = rating
+            }
+        }
+    }
+
     
     override func viewWillAppear(_ animated: Bool) {
         db.collection("users").document(self.uid).collection("trips").whereField("isCurrentTrip", isEqualTo: true).getDocuments { [self] (querySnapshot, error) in
@@ -64,18 +96,18 @@ class MapViewController: UIViewController, FloatingPanelControllerDelegate, UISe
     @IBAction func doneButtonPressed(_ sender: Any) {
         formatter.dateFormat = "dd/MM/yyyy"
         let currentDate = formatter.string(from: date)
-        
+
         if let lat = self.lat, let long = self.long, let locationName = self.currentLocation {
             db.collection("users").document(UserDefaults.standard.string(forKey: "uid")!).collection("trips").document(currentTripID!).collection("placesVisited").document().setData([
                 "locationName": locationName,
                 "lat": lat,
                 "long": long,
-                "rating": "",
-                "description": "",
+                "rating": rating,
+                "description": desc,
                 "date": currentDate,
                 "timeStamp": Date()
             ])
-            
+
             navigationController?.popViewController(animated: true)
         }
     }
@@ -142,7 +174,7 @@ class MapViewController: UIViewController, FloatingPanelControllerDelegate, UISe
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("SEARCH BITCHES")
+//        print("SEARCH BITCHES")
         let searchRequest = MKLocalSearch.Request()
         searchRequest.naturalLanguageQuery = searchBar.text
         

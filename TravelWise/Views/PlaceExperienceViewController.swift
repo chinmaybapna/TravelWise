@@ -7,13 +7,14 @@
 
 import UIKit
 import Firebase
+import Cosmos
 
 class PlaceExperienceViewController: UIViewController, EditExperienceDelegate {
-    
     let db = Firestore.firestore()
     
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var cosmosView: CosmosView!
     var uid: String?
     var placeID: String?
     var placeName: String?
@@ -39,7 +40,7 @@ class PlaceExperienceViewController: UIViewController, EditExperienceDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         if let placeID = placeID, let uid = uid {
-            db.collection("users").document(uid).collection("trips").document(self.currentTripID!).collection("placesVisited").document(placeID).getDocument { querySnapshot, error in
+            db.collection("users").document(uid).collection("trips").document(self.currentTripID!).collection("placesVisited").document(placeID).getDocument { [self] querySnapshot, error in
                 if error != nil {
                     print(error?.localizedDescription)
                 }
@@ -55,6 +56,10 @@ class PlaceExperienceViewController: UIViewController, EditExperienceDelegate {
                         else {
                             self.descriptionLabel.text = description
                         }
+                        
+                        let rating = data["rating"] as! Double
+                        self.cosmosView.rating = rating
+                        cosmosView.settings.updateOnTouch = false
                     }
                 }
             }
@@ -76,8 +81,9 @@ class PlaceExperienceViewController: UIViewController, EditExperienceDelegate {
         }
     }
     
-    func updateExperience(description: String) {
+    func updateExperience(description: String, rating: Double) {
         descriptionLabel.text = description
+        cosmosView.rating = rating
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

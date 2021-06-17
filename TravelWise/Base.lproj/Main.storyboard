@@ -1522,6 +1522,7 @@
                     <navigationItem key="navigationItem" id="ndO-38-EBA"/>
                     <connections>
                         <outlet property="addressLabel" destination="M4V-SF-exP" id="V9E-2x-L89"/>
+                        <outlet property="cosmosView" destination="n5G-11-aHG" id="fgL-2b-RPM"/>
                         <outlet property="deleteButton" destination="Nxg-rD-h9v" id="V3x-IJ-v3i"/>
                         <outlet property="descriptionLabel" destination="aE9-Wa-JX3" id="6r0-19-26D"/>
                         <outlet property="editButton" destination="ddl-4P-eIa" id="daa-Kr-RnN"/>

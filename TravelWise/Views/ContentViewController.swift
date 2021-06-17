@@ -34,6 +34,11 @@ class ContentViewController: UIViewController, UITextViewDelegate {
         
         cosmosView.settings.starSize = 30
         cosmosView.settings.starMargin = 10
+        cosmosView.rating = 5
+        cosmosView.didFinishTouchingCosmos = { rating in
+            let dict = ["rating": rating]
+            NotificationCenter.default.post(name: Notification.Name("RatingChanged"), object: dict)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +62,10 @@ class ContentViewController: UIViewController, UITextViewDelegate {
         if textView.text.isEmpty {
             textView.text = "Tell us about your experience at this place"
             textView.textColor = UIColor.lightGray
+        }
+        else {
+            let dict = ["description": textView.text]
+            NotificationCenter.default.post(name: Notification.Name("DescriptionChanged"), object: dict)
         }
     }
 }

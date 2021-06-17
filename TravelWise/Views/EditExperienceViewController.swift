@@ -10,7 +10,7 @@ import Cosmos
 import Firebase
 
 protocol EditExperienceDelegate {
-    func updateExperience(description: String)
+    func updateExperience(description: String, rating: Double)
 }
 
 class EditExperienceViewController: UIViewController, UITextViewDelegate {
@@ -62,6 +62,8 @@ class EditExperienceViewController: UIViewController, UITextViewDelegate {
                     
                     if let data = data {
                         let description = data["description"] as! String
+                        let rating = data["rating"] as! Double
+                        self.cosmosView.rating = rating
                         
                         if description == "" {
                             self.descriptionTextView.text = "No description provided."
@@ -81,11 +83,11 @@ class EditExperienceViewController: UIViewController, UITextViewDelegate {
             if let placeID = self.placeID, let description = self.descriptionTextView.text {
                 self.db.collection("users").document(UserDefaults.standard.string(forKey: "uid")!).collection("trips").document(self.currentTripID!).collection("placesVisited").document(placeID).setData([
                     "description": description,
-                    "rating": ""
+                    "rating": self.cosmosView.rating
                 ], merge: true)
                 
                 if let delegate = self.delegate {
-                    delegate.updateExperience(description: description)
+                    delegate.updateExperience(description: description, rating: self.cosmosView.rating)
                 }
             }
         }
