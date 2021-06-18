@@ -10,6 +10,8 @@ import Firebase
 import RangeSeekSlider
 
 class EndTripViewController: UIViewController, UITextViewDelegate {
+    
+    let formatter = DateFormatter()
 
     @IBOutlet weak var rangeSlider: RangeSeekSlider!
     @IBOutlet weak var shareTrip: UISwitch!
@@ -22,9 +24,21 @@ class EndTripViewController: UIViewController, UITextViewDelegate {
     var tripName: String?
     var tripImageURL: String?
     var tripProfileImageURL: String?
-    
+    var name = ""
+    var profileImageURL = ""
     let db = Firestore.firestore()
     
+    override func viewWillAppear(_ animated: Bool) {
+        db.collection("users").document(self.uid!).getDocument { q, e in
+            if e != nil {
+                print(e!.localizedDescription)
+            } else {
+                let udata = q!.data()
+                self.name = udata!["name"] as! String
+                self.profileImageURL = udata!["profileImageURL"] as! String
+            }
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -51,6 +65,41 @@ class EndTripViewController: UIViewController, UITextViewDelegate {
         if !shareTrip.isOn {
             privateTrip = true
         }
+        let hashtagText = hashtagTextView.text as String? ?? ""
+        let hashtags = hashtagText.components(separatedBy: "#")
+        let trimmedTags = hashtags.map { $0.trimmingCharacters(in: .whitespaces) }
+        var tagSet = Set<String>()
+        var flag = true
+        for tag in trimmedTags {
+            let arr = tag.components(separatedBy: " ")
+            if(arr.count > 1)
+            {
+                flag = false
+                let alert = UIAlertController(title: "Invalid Tags", message: "", preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
+                break
+            } else if(arr[0] == ""){
+                continue
+            }else {
+                tagSet.insert(arr[0].lowercased())
+            }
+        }
+        print(tagSet)
+        if(flag)
+        {
+            for tag in tagSet {
+                self.db.collection("searchPlacesTags").document("tags").collection(tag).document(self.currentTripID!).setData([
+                    "uid": self.uid!,
+                    "tripID": self.currentTripID!,
+                    "timeStamp": Date(),
+                    "name": self.name,
+                    "profileImageURL": self.profileImageURL
+                ])
+            }
+        }
+        
         self.db.collection("users").document(self.uid!).collection("trips").document(self.currentTripID!).setData([
             "isCurrentTrip": false,
             "minExpenseValue": rangeSlider.selectedMinValue,

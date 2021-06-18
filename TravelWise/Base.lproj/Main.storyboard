@@ -14,7 +14,7 @@
             <objects>
                 <viewController id="Cq1-jN-8m8" customClass="LoginViewController" customModule="TravelWise" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SMr-eG-o5K">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cQv-Mj-JrH">
@@ -65,8 +65,8 @@
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in to get continue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SBb-RM-tHM">
-                                        <rect key="frame" x="30" y="77" width="193.5" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in to continue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SBb-RM-tHM">
+                                        <rect key="frame" x="30" y="77" width="160.5" height="24"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -706,6 +706,7 @@
                         <outlet property="segments" destination="lMu-PE-qth" id="4ED-SV-Lbg"/>
                         <outlet property="tableView" destination="qK9-OU-17O" id="oHi-S9-qBT"/>
                         <segue destination="dFZ-iF-7LP" kind="show" identifier="show_user_profile" id="k5w-i1-dXT"/>
+                        <segue destination="dBg-O4-ol5" kind="show" identifier="view_trip" id="A86-En-mHu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4hX-sZ-24T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -717,7 +718,7 @@
             <objects>
                 <viewController id="3Dd-Kv-TXH" customClass="ProfileViewController" customModule="TravelWise" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FgH-6H-BdY">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DDW-uV-Hps">
@@ -775,7 +776,7 @@
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jMm-Kz-04P">
-                                <rect key="frame" x="0.0" y="332.5" width="414" height="392.5"/>
+                                <rect key="frame" x="0.0" y="332.5" width="414" height="509.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TwB-uC-E1D">
@@ -849,6 +850,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="lRS-Am-Eth">
                         <barButtonItem key="backBarButtonItem" title="Back" id="aWk-LX-Nw7"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="3Ba-gP-5ZG">
+                            <imageReference key="image" image="gearshape.fill" catalog="system" symbolScale="large"/>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="settingsActions:" destination="3Dd-Kv-TXH" id="oVj-bO-u5o"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="followersLabel" destination="mX5-eS-CWX" id="kRd-Dh-5Vr"/>
@@ -861,6 +869,8 @@
                         <segue destination="HMt-hc-fZh" kind="show" identifier="show_followers" id="hnE-R7-vLE"/>
                         <segue destination="HMt-hc-fZh" kind="show" identifier="show_following" id="qQJ-Fe-WpM"/>
                         <segue destination="dBg-O4-ol5" kind="show" identifier="profile_trip_details" id="uN4-8a-MRX"/>
+                        <segue destination="Cq1-jN-8m8" kind="show" identifier="logout_successful" id="S8J-Mb-Djf"/>
+                        <segue destination="cuJ-m6-GGC" kind="show" identifier="editProfileSegue" id="yQF-gN-4JV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SVP-Ha-uwn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -872,7 +882,7 @@
             <objects>
                 <viewController id="HMt-hc-fZh" customClass="FollowersFollowingViewController" customModule="TravelWise" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9iv-BE-AxC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="AF8-o5-w6N">
@@ -880,7 +890,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QhN-vV-cBj">
-                                <rect key="frame" x="0.0" y="51" width="414" height="674"/>
+                                <rect key="frame" x="0.0" y="51" width="414" height="757"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -906,12 +916,117 @@
             </objects>
             <point key="canvasLocation" x="11520" y="1385"/>
         </scene>
+        <!--Edit Profile View Controller-->
+        <scene sceneID="LcL-sQ-C0U">
+            <objects>
+                <viewController id="cuJ-m6-GGC" customClass="EditProfileViewController" customModule="TravelWise" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OjY-Oh-Asb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kiy-vj-KbI">
+                                <rect key="frame" x="30" y="310" width="354" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Kh-2a-Sx3">
+                                <rect key="frame" x="30" y="560.5" width="354" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date of birth" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nt1-1z-lda">
+                                <rect key="frame" x="30" y="414.5" width="354" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Juh-yg-GLx">
+                                <rect key="frame" x="30" y="350.5" width="354" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hometown" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qgu-ig-wxs">
+                                <rect key="frame" x="30" y="519.5" width="354" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4bI-LJ-7GI">
+                                <rect key="frame" x="30" y="455.5" width="354" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MFV-XP-c2Q">
+                                <rect key="frame" x="192" y="150" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="fRW-br-YlF"/>
+                                </constraints>
+                                <state key="normal" title="Edit"/>
+                                <connections>
+                                    <action selector="editProfileImage:" destination="cuJ-m6-GGC" eventType="touchUpInside" id="RYb-Oe-SsM"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aYf-g4-Fns">
+                                <rect key="frame" x="157" y="50" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="9DM-og-eEZ"/>
+                                    <constraint firstAttribute="width" constant="100" id="Cfm-By-KNd"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="KYT-C5-2nZ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="KYT-C5-2nZ" firstAttribute="trailing" secondItem="1Kh-2a-Sx3" secondAttribute="trailing" constant="30" id="0yE-Sd-0zf"/>
+                            <constraint firstItem="4bI-LJ-7GI" firstAttribute="top" secondItem="nt1-1z-lda" secondAttribute="bottom" constant="20" id="1KZ-PS-beu"/>
+                            <constraint firstItem="MFV-XP-c2Q" firstAttribute="centerX" secondItem="OjY-Oh-Asb" secondAttribute="centerX" id="4MV-Hf-3J3"/>
+                            <constraint firstItem="1Kh-2a-Sx3" firstAttribute="top" secondItem="Qgu-ig-wxs" secondAttribute="bottom" constant="20" id="6GP-EH-JQ3"/>
+                            <constraint firstItem="KYT-C5-2nZ" firstAttribute="trailing" secondItem="Kiy-vj-KbI" secondAttribute="trailing" constant="30" id="6QA-yu-Lnw"/>
+                            <constraint firstItem="Qgu-ig-wxs" firstAttribute="leading" secondItem="KYT-C5-2nZ" secondAttribute="leading" constant="30" id="BMS-gS-Tgl"/>
+                            <constraint firstItem="1Kh-2a-Sx3" firstAttribute="leading" secondItem="KYT-C5-2nZ" secondAttribute="leading" constant="30" id="DGg-fs-BW4"/>
+                            <constraint firstItem="Juh-yg-GLx" firstAttribute="top" secondItem="Kiy-vj-KbI" secondAttribute="bottom" constant="20" id="FE5-5g-BgW"/>
+                            <constraint firstItem="aYf-g4-Fns" firstAttribute="top" secondItem="KYT-C5-2nZ" secondAttribute="top" constant="50" id="HOF-TJ-gcp"/>
+                            <constraint firstItem="KYT-C5-2nZ" firstAttribute="trailing" secondItem="nt1-1z-lda" secondAttribute="trailing" constant="30" id="K2n-W3-g5c"/>
+                            <constraint firstItem="KYT-C5-2nZ" firstAttribute="trailing" secondItem="Qgu-ig-wxs" secondAttribute="trailing" constant="30" id="Kv7-cD-P7y"/>
+                            <constraint firstItem="KYT-C5-2nZ" firstAttribute="trailing" secondItem="Juh-yg-GLx" secondAttribute="trailing" constant="30" id="PA0-Z1-qZL"/>
+                            <constraint firstItem="MFV-XP-c2Q" firstAttribute="top" secondItem="aYf-g4-Fns" secondAttribute="bottom" id="SdA-Bf-k25"/>
+                            <constraint firstItem="Kiy-vj-KbI" firstAttribute="leading" secondItem="KYT-C5-2nZ" secondAttribute="leading" constant="30" id="WnY-N4-yHK"/>
+                            <constraint firstItem="Kiy-vj-KbI" firstAttribute="top" secondItem="KYT-C5-2nZ" secondAttribute="top" constant="310" id="XRI-q9-JrQ"/>
+                            <constraint firstItem="Juh-yg-GLx" firstAttribute="leading" secondItem="KYT-C5-2nZ" secondAttribute="leading" constant="30" id="iCF-ar-PC1"/>
+                            <constraint firstItem="aYf-g4-Fns" firstAttribute="centerX" secondItem="OjY-Oh-Asb" secondAttribute="centerX" id="iTQ-BR-bQe"/>
+                            <constraint firstItem="nt1-1z-lda" firstAttribute="leading" secondItem="KYT-C5-2nZ" secondAttribute="leading" constant="30" id="m5I-6S-Ye0"/>
+                            <constraint firstItem="Qgu-ig-wxs" firstAttribute="top" secondItem="4bI-LJ-7GI" secondAttribute="bottom" constant="30" id="m9l-sZ-B7j"/>
+                            <constraint firstItem="nt1-1z-lda" firstAttribute="top" secondItem="Juh-yg-GLx" secondAttribute="bottom" constant="30" id="qC7-3R-UKj"/>
+                            <constraint firstItem="KYT-C5-2nZ" firstAttribute="trailing" secondItem="4bI-LJ-7GI" secondAttribute="trailing" constant="30" id="rTV-wA-3wR"/>
+                            <constraint firstItem="4bI-LJ-7GI" firstAttribute="leading" secondItem="KYT-C5-2nZ" secondAttribute="leading" constant="30" id="yVn-Ge-Srz"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="ucg-FI-Wxt">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="gqt-5r-AD8">
+                            <connections>
+                                <action selector="finishEditProfile:" destination="cuJ-m6-GGC" id="mIT-tb-Bs2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="dobTextField" destination="4bI-LJ-7GI" id="EZT-Tj-b3C"/>
+                        <outlet property="hometownTextField" destination="1Kh-2a-Sx3" id="yGa-YJ-TpF"/>
+                        <outlet property="nameTextField" destination="Juh-yg-GLx" id="Ryx-Ej-eZV"/>
+                        <outlet property="profileImage" destination="aYf-g4-Fns" id="IcA-0X-GvW"/>
+                        <segue destination="3Dd-Kv-TXH" kind="show" identifier="finishEditProfile" id="a4N-tq-I9P"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lO2-oe-wBH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="12360.869565217392" y="1384.8214285714284"/>
+        </scene>
         <!--Register-->
         <scene sceneID="AH7-0g-2Ft">
             <objects>
                 <viewController id="McU-qX-LMv" customClass="RegisterViewController" customModule="TravelWise" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bz1-IC-0Pv">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yCj-LB-mVW">
@@ -1008,7 +1123,7 @@
             <objects>
                 <viewController id="jC9-pc-ubI" customClass="RegistrationDetailsViewController" customModule="TravelWise" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Gd4-xv-eWz">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XAk-TP-YZD">
@@ -1642,14 +1757,31 @@
             <point key="canvasLocation" x="6671" y="3005"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="dDe-5L-IK7">
+            <size key="intrinsicContentSize" width="-1" height="65"/>
+        </designable>
+        <designable name="gVu-Ev-IMb">
+            <size key="intrinsicContentSize" width="120" height="20"/>
+        </designable>
+        <designable name="n5G-11-aHG">
+            <size key="intrinsicContentSize" width="120" height="20"/>
+        </designable>
+        <designable name="qfZ-ms-I2M">
+            <size key="intrinsicContentSize" width="120" height="20"/>
+        </designable>
+    </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="haO-Bk-Pf2"/>
-        <segue reference="aaR-dP-ZBy"/>
+        <segue reference="k5w-i1-dXT"/>
+        <segue reference="4Ql-gj-ml2"/>
         <segue reference="hnE-R7-vLE"/>
-        <segue reference="uN4-8a-MRX"/>
+        <segue reference="a4N-tq-I9P"/>
+        <segue reference="A86-En-mHu"/>
+        <segue reference="S8J-Mb-Djf"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="camera.fill" catalog="system" width="128" height="94"/>
+        <image name="gearshape.fill" catalog="system" width="128" height="121"/>
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="like-2" width="128" height="128"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>

@@ -42,6 +42,28 @@ class ProfileViewController : UIViewController, UITableViewDataSource, UITableVi
         followingLabel.addGestureRecognizer(tapGesture2)
     }
     
+    @IBAction func settingsActions(_ sender: Any) {
+        let actionSheet = UIAlertController(title: "Choose Option", message: nil, preferredStyle: .actionSheet)
+        
+        let editProfileAction = UIAlertAction(title: "Edit Profile", style: .default) { (action) in
+            self.performSegue(withIdentifier: "editProfileSegue", sender: nil)
+        }
+        actionSheet.addAction(editProfileAction)
+        
+        let logoutAction = UIAlertAction(title: "Log Out", style: .destructive) { (action) in
+            do {
+                try Auth.auth().signOut()
+                self.performSegue(withIdentifier: "logout_successful", sender: nil)
+            }
+            catch { print("already logged out") }
+        }
+        actionSheet.addAction(logoutAction)
+        
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(actionSheet, animated: true, completion: nil)
+    }
+    
     func fetchUserData() {
         db.collection("users").document(uid).getDocument { (querySnapshot, error) in
             if error != nil {

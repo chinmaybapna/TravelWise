@@ -74,11 +74,15 @@ class LoginViewController: UIViewController {
     @IBAction func nextButtonTapped(_ sender: Any) {
         if let email = emailTextField.text, let password = passwordTextField.text {
             db.collection("registeredEmails").whereField("email", isEqualTo: email).getDocuments(completion: { (querySnapshot, error) in
-                if querySnapshot!.documents.count == 0 {
-                    let alert = UIAlertController(title: "Account does not exist", message: "", preferredStyle: .alert)
-                    let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-                    alert.addAction(action)
-                    self.present(alert, animated: true, completion: nil)
+               if querySnapshot!.documents.count == 0 {
+//                if querySnapshot == nil {
+              //  if let query = querySnapshot {
+            //       if query.documents.count == 0 {
+                        let alert = UIAlertController(title: "Account does not exist", message: "", preferredStyle: .alert)
+                        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+                            alert.addAction(action)
+                        self.present(alert, animated: true, completion: nil)
+                    
                 }
                 else {
                     if self.emailTextField.text == "" || self.passwordTextField.text == "" {

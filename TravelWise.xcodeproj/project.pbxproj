@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		05B48BE802B3563441B4501C /* Pods_TravelWise.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EAFB91075A9093C58AACD86 /* Pods_TravelWise.framework */; };
+		13826801267BD42B00DF183C /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13826800267BD42B00DF183C /* EditProfileViewController.swift */; };
 		13999C2C2639E9D5000FCF84 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13999C2A2639E9D5000FCF84 /* HomeTableViewCell.swift */; };
 		13999C2D2639E9D5000FCF84 /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13999C2B2639E9D5000FCF84 /* HomeTableViewCell.xib */; };
 		13999C31263AAE80000FCF84 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13999C30263AAE80000FCF84 /* ProfileViewController.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		13826800267BD42B00DF183C /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		13999C2A2639E9D5000FCF84 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		13999C2B2639E9D5000FCF84 /* HomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
 		13999C30263AAE80000FCF84 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				82F5E5A7264AE0050010F017 /* PlaceExperienceViewController.swift */,
 				8267D972264D65C600CEC91A /* EditExperienceViewController.swift */,
 				823315F6267AA955006A612F /* EndTripViewController.swift */,
+				13826800267BD42B00DF183C /* EditProfileViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				82F5E5A8264AE0050010F017 /* PlaceExperienceViewController.swift in Sources */,
 				8225D2EA264A59CB00A9A7CB /* PlacesVisitedViewController.swift in Sources */,
 				8225D2E226491F3000A9A7CB /* Trip.swift in Sources */,
+				13826801267BD42B00DF183C /* EditProfileViewController.swift in Sources */,
 				82A69140262306B5002731C6 /* ViewController.swift in Sources */,
 				82DCA94E2626DCF800CD8D7F /* TripViewController.swift in Sources */,
 				82A6916C26236676002731C6 /* RegisterViewController.swift in Sources */,
