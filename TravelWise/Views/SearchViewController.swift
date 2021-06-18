@@ -50,25 +50,16 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         }
     }
     
-//    var uid = ""
-//    var tripID = ""
-//    var tripDate = ""
-//    var tripName = ""
-//    var tripProfileImageURL = ""
-//    var startDate = ""
-//    var upvotes = 0
-//    var name = ""
-//    var profileImageURL = ""
-//    var isCurrentTrip = false
-//    var isPrivate = false
-//    var tempHomeTrip: HomeTrips = HomeTrips(profileImageURL: "", name: "", tripName: "", tripProfileImageURL: "", upvotes: 0, startDate: "", userId: "", tripId: "")
-    
     func searchForPlaces(place: String) {
         searchedPlaces = []
         db.collection("searchPlacesTags").document("tags").collection(place).order(by: "timeStamp").getDocuments { [self] (querySnapshot, error) in
             if error != nil {
                 print(error!.localizedDescription)
             } else if querySnapshot!.documents.count == 0 {
+                let alert = UIAlertController(title: "No result", message: "No such place found", preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
                 print("no such places")
             }
             else {
@@ -122,6 +113,12 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         self.db.collection("users").whereField("name", isEqualTo: name).getDocuments { (querySnapshot, error) in
             if error != nil {
                 print(error!.localizedDescription)
+            } else if querySnapshot!.documents.count == 0 {
+                let alert = UIAlertController(title: "No result", message: "No user with such name found", preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
+                print("no such people")
             }
             else {
                 for document in querySnapshot!.documents {
