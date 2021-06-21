@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 import SDWebImage
 
-class SearchProfileViewController: UIViewController, UITableViewDataSource {
+class SearchProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     let db = Firestore.firestore()
     
     @IBOutlet weak var profileImageView: UIImageView!
@@ -29,6 +29,7 @@ class SearchProfileViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.tableFooterView = UIView()
         
         tableView.register(UINib(nibName: "ProfileTableViewCell", bundle: nil), forCellReuseIdentifier: "ReusableHomeCell")
@@ -116,6 +117,12 @@ class SearchProfileViewController: UIViewController, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "profile_trip_details", sender: self)
+        print(indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     @IBAction func followButtonClicked(_ sender: Any) {
         if let uid = uid {
             if following == false {
@@ -156,6 +163,29 @@ class SearchProfileViewController: UIViewController, UITableViewDataSource {
                     "following": FieldValue.increment(Int64(-1))
                 ])
             }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "show_followers") {
+            let ffVC = segue.destination as! FollowersFollowingViewController
+            ffVC.showFollowers = true
+            ffVC.showFollowing = false
+        }
+        
+        if(segue.identifier == "show_following") {
+            let ffVC = segue.destination as! FollowersFollowingViewController
+            ffVC.showFollowers = false
+            ffVC.showFollowing = true
+        }
+        
+        if(segue.identifier == "profile_trip_details") {
+            let tripViewVC = segue.destination as! TripViewController
+            tripViewVC.currentTripID = trips[tableView.indexPathForSelectedRow!.row].tripID
+//            print(trips[homeTableView.indexPathForSelectedRow!.row].tripID)
+            tripViewVC.uid = self.uid!
+            tripViewVC.showCurrentTrip = false
+//            print(trips[homeTableView.indexPathForSelectedRow!.row].userId)
         }
     }
 }

@@ -155,7 +155,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         if(segment == 0)
         {
 //            print("count : ")
-            print("count: \(searchedPlaces.count)")
+//            print("count: \(searchedPlaces.count)")
             return searchedPlaces.count
         } else {
             return searchedUsers.count

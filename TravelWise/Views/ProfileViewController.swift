@@ -61,6 +61,8 @@ class ProfileViewController : UIViewController, UITableViewDataSource, UITableVi
         
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
+        actionSheet.view.tintColor = UIColor.black
+        
         self.present(actionSheet, animated: true, completion: nil)
     }
     

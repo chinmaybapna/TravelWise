@@ -78,7 +78,7 @@ class LoginViewController: UIViewController {
 //                if querySnapshot == nil {
               //  if let query = querySnapshot {
             //       if query.documents.count == 0 {
-                        let alert = UIAlertController(title: "Account does not exist", message: "", preferredStyle: .alert)
+                        let alert = UIAlertController(title: "Account does not exist", message: "No account with the given username exists.", preferredStyle: .alert)
                         let action = UIAlertAction(title: "OK", style: .default, handler: nil)
                             alert.addAction(action)
                         self.present(alert, animated: true, completion: nil)

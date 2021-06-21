@@ -62,7 +62,7 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
         if(uid == UserDefaults.standard.string(forKey: "uid")! && !showCurrentTrip) {
             let deleteBarButtonItem = UIBarButtonItem(title: "Delete", style: .plain, target: self, action: #selector(deleteTrip))
-            deleteBarButtonItem.tintColor = .white
+            deleteBarButtonItem.tintColor = .red
             self.navigationItem.rightBarButtonItem  = deleteBarButtonItem
             navigationItem.hidesBackButton = false
             self.delete = true
