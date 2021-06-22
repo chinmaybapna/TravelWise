@@ -142,7 +142,7 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                         self.tripName = data["tripName"] as? String
                         self.tripProfileImageURL = data["tripProfileImageURL"] as? String
                         self.tripNameLabel.text = self.tripName
-                        self.tripProfileImageView.sd_setImage(with: URL(string: self.tripProfileImageURL!), placeholderImage: UIImage(named: "rowan-heuvel-U6t80TWJ1DM-unsplash"))
+                        self.tripProfileImageView.sd_setImage(with: URL(string: self.tripProfileImageURL!), placeholderImage: UIImage(named: "defaultTripProfileImage"))
                     }
                     
                     getPlacesVisited()
@@ -164,7 +164,7 @@ class TripViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                         self.tripProfileImageURL = data["tripProfileImageURL"] as? String
                         self.upvotesLabel.text = "\(data["upvotes"] as! Int)"
                         self.tripNameLabel.text = self.tripName
-                        self.tripProfileImageView.sd_setImage(with: URL(string: self.tripProfileImageURL!), placeholderImage: UIImage(named: "rowan-heuvel-U6t80TWJ1DM-unsplash"))
+                        self.tripProfileImageView.sd_setImage(with: URL(string: self.tripProfileImageURL!), placeholderImage: UIImage(named: "defaultTripProfileImage"))
                         let minExpense = data["minExpenseValue"] as! Int
                         let maxExpense = data["maxExpenseValue"] as! Int
                         print(minExpense)

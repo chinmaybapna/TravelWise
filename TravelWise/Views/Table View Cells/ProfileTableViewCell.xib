@@ -24,7 +24,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2kH-9i-dIL">
                                 <rect key="frame" x="20" y="25" width="374" height="218"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wvK-XN-dWy">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultTripProfileImage" translatesAutoresizingMaskIntoConstraints="NO" id="wvK-XN-dWy">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="150"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="150" id="cur-qM-wNB"/>
@@ -98,6 +98,7 @@
     </objects>
     <resources>
         <image name="chevron.forward" catalog="system" width="96" height="128"/>
+        <image name="defaultTripProfileImage" width="4167" height="2917"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -98,7 +98,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                     self.nameTextField.text = self.name
                     self.dobTextField.text = self.dob
                     self.hometownTextField.text = self.hometown
-                    self.profileImage.sd_setImage(with: URL(string: profileImageURL), placeholderImage: UIImage(named: "atikh-bana-FtBS0p23fcc-unsplash"))
+                    self.profileImage.sd_setImage(with: URL(string: profileImageURL), placeholderImage: UIImage(named: "defaultProfileImage"))
                 }
             }
         }

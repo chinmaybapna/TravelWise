@@ -68,14 +68,12 @@ class SearchProfileViewController: UIViewController, UITableViewDataSource, UITa
                         let profileImageURL = data["profileImageURL"] as! String
                         let followers = data["followers"] as! Int
                         let following = data["following"] as! Int
-                        let numberOfTrips = data["numberOfTrips"] as! Int
-                        
+            
                         self.nameLabel.text = name
                         self.hometownLabel.text = hometown
-                        self.profileImageView.sd_setImage(with: URL(string: profileImageURL), placeholderImage: UIImage(named: "atikh-bana-FtBS0p23fcc-unsplash"))
+                        self.profileImageView.sd_setImage(with: URL(string: profileImageURL), placeholderImage: UIImage(named: "defaultProfileImage"))
                         self.followersLabel.text = "\(followers)"
                         self.followingLabel.text = "\(following)"
-                        self.tripsLabel.text = "\(numberOfTrips)"
                     }
                 }
             }
@@ -85,6 +83,8 @@ class SearchProfileViewController: UIViewController, UITableViewDataSource, UITa
                     print(error?.localizedDescription)
                 }
                 else {
+                    let numberOfTrips = querySnapshot!.documents.count
+                    self.tripsLabel.text = "\(numberOfTrips)"
                     for document in querySnapshot!.documents {
                         let data = document.data()
                         if( data["isCurrentTrip"] as! Bool || data["privateTrip"] as! Bool ) { continue }

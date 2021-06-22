@@ -43,7 +43,7 @@ class EndTripViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
 
         tripNameLabel.text = tripName
-        self.tripProfileImageView.sd_setImage(with: URL(string: self.tripProfileImageURL!), placeholderImage: UIImage(named: "rowan-heuvel-U6t80TWJ1DM-unsplash"))
+        self.tripProfileImageView.sd_setImage(with: URL(string: self.tripProfileImageURL!), placeholderImage: UIImage(named: "defaultTripProfileImage"))
         rangeSlider.minLabelFont = UIFont.systemFont(ofSize: 15)
         rangeSlider.maxLabelFont = UIFont.systemFont(ofSize: 15)
         
