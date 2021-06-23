@@ -112,7 +112,7 @@ class FollowersFollowingViewController: UIViewController, UITableViewDataSource,
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "followers_following_cell", for: indexPath) as! FollowersFollowingTableViewCell
         cell.nameLabel.text = users[indexPath.row].name
-        cell.profileImageView.sd_setImage(with: URL(string: users[indexPath.row].profileImageURL), placeholderImage: UIImage(named: "atikh-bana-FtBS0p23fcc-unsplash"))
+        cell.profileImageView.sd_setImage(with: URL(string: users[indexPath.row].profileImageURL), placeholderImage: UIImage(named: "defaultProfileImage"))
         return cell
     }
     

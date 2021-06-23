@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 import SDWebImage
 
-class SearchProfileViewController: UIViewController, UITableViewDataSource {
+class SearchProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     let db = Firestore.firestore()
     
     @IBOutlet weak var profileImageView: UIImageView!
@@ -29,6 +29,7 @@ class SearchProfileViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.tableFooterView = UIView()
         
         tableView.register(UINib(nibName: "ProfileTableViewCell", bundle: nil), forCellReuseIdentifier: "ReusableHomeCell")
@@ -67,14 +68,12 @@ class SearchProfileViewController: UIViewController, UITableViewDataSource {
                         let profileImageURL = data["profileImageURL"] as! String
                         let followers = data["followers"] as! Int
                         let following = data["following"] as! Int
-                        let numberOfTrips = data["numberOfTrips"] as! Int
-                        
+            
                         self.nameLabel.text = name
                         self.hometownLabel.text = hometown
-                        self.profileImageView.sd_setImage(with: URL(string: profileImageURL), placeholderImage: UIImage(named: "atikh-bana-FtBS0p23fcc-unsplash"))
+                        self.profileImageView.sd_setImage(with: URL(string: profileImageURL), placeholderImage: UIImage(named: "defaultProfileImage"))
                         self.followersLabel.text = "\(followers)"
                         self.followingLabel.text = "\(following)"
-                        self.tripsLabel.text = "\(numberOfTrips)"
                     }
                 }
             }
@@ -84,6 +83,8 @@ class SearchProfileViewController: UIViewController, UITableViewDataSource {
                     print(error?.localizedDescription)
                 }
                 else {
+                    let numberOfTrips = querySnapshot!.documents.count
+                    self.tripsLabel.text = "\(numberOfTrips)"
                     for document in querySnapshot!.documents {
                         let data = document.data()
                         if( data["isCurrentTrip"] as! Bool || data["privateTrip"] as! Bool ) { continue }
@@ -114,6 +115,12 @@ class SearchProfileViewController: UIViewController, UITableViewDataSource {
         cell.tripUpvotes.text = "\(trip.upvotes) upvotes"
         cell.tripImage.sd_setImage(with: URL(string: trip.tripImageURL), placeholderImage: UIImage(named: "Paris"))
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "profile_trip_details", sender: self)
+        print(indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     @IBAction func followButtonClicked(_ sender: Any) {
@@ -156,6 +163,29 @@ class SearchProfileViewController: UIViewController, UITableViewDataSource {
                     "following": FieldValue.increment(Int64(-1))
                 ])
             }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "show_followers") {
+            let ffVC = segue.destination as! FollowersFollowingViewController
+            ffVC.showFollowers = true
+            ffVC.showFollowing = false
+        }
+        
+        if(segue.identifier == "show_following") {
+            let ffVC = segue.destination as! FollowersFollowingViewController
+            ffVC.showFollowers = false
+            ffVC.showFollowing = true
+        }
+        
+        if(segue.identifier == "profile_trip_details") {
+            let tripViewVC = segue.destination as! TripViewController
+            tripViewVC.currentTripID = trips[tableView.indexPathForSelectedRow!.row].tripID
+//            print(trips[homeTableView.indexPathForSelectedRow!.row].tripID)
+            tripViewVC.uid = self.uid!
+            tripViewVC.showCurrentTrip = false
+//            print(trips[homeTableView.indexPathForSelectedRow!.row].userId)
         }
     }
 }

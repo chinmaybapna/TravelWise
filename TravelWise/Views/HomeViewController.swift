@@ -121,8 +121,8 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         cell.tripName.text = trip.tripName
         cell.profileName.text = trip.name
         cell.tripUpvotes.text = "\(trip.upvotes) upvotes"
-        cell.tripImage.sd_setImage(with: URL(string: trip.tripProfileImageURL), placeholderImage: UIImage(named: "Paris"))
-        cell.profileImage.sd_setImage(with: URL(string: trip.profileImageURL), placeholderImage: UIImage(named: "Paris"))
+        cell.tripImage.sd_setImage(with: URL(string: trip.tripProfileImageURL), placeholderImage: UIImage(named: "defaultTripProfileImage"))
+        cell.profileImage.sd_setImage(with: URL(string: trip.profileImageURL), placeholderImage: UIImage(named: "defaultProfileImage"))
         return cell
     }
     

@@ -152,7 +152,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         if(segment == 0)
         {
 //            print("count : ")
-            print("count: \(searchedPlaces.count)")
+//            print("count: \(searchedPlaces.count)")
             return searchedPlaces.count
         } else {
             return searchedUsers.count
@@ -168,8 +168,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
             cell.tripName.text = trip.tripName
             cell.profileName.text = trip.name
             cell.tripUpvotes.text = "\(trip.upvotes) upvotes"
-            cell.tripImage.sd_setImage(with: URL(string: trip.tripProfileImageURL), placeholderImage: UIImage(named: "Paris"))
-            cell.profileImage.sd_setImage(with: URL(string: trip.profileImageURL), placeholderImage: UIImage(named: "Paris"))
+            cell.tripImage.sd_setImage(with: URL(string: trip.tripProfileImageURL), placeholderImage: UIImage(named: "defaultTripProfileImage"))
+            cell.profileImage.sd_setImage(with: URL(string: trip.profileImageURL), placeholderImage: UIImage(named: "defaultProfileImage"))
             print(trip.name)
             return cell
             
@@ -177,7 +177,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
             let cell = tableView.dequeueReusableCell(withIdentifier: "people_search_cell", for: indexPath) as! PeopleSearchTableViewCell
             cell.name.text = searchedUsers[indexPath.row].name
             cell.hometown.text = searchedUsers[indexPath.row].hometown
-            cell.profileImageView.sd_setImage(with: URL(string: searchedUsers[indexPath.row].profileImageURL), placeholderImage: UIImage(named: "atikh-bana-FtBS0p23fcc-unsplash"))
+            cell.profileImageView.sd_setImage(with: URL(string: searchedUsers[indexPath.row].profileImageURL), placeholderImage: UIImage(named: "defaultProfileImage"))
             return cell
         }
     }

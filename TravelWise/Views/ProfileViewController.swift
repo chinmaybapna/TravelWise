@@ -61,6 +61,8 @@ class ProfileViewController : UIViewController, UITableViewDataSource, UITableVi
         
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
+        actionSheet.view.tintColor = UIColor.black
+        
         self.present(actionSheet, animated: true, completion: nil)
     }
     
@@ -78,14 +80,12 @@ class ProfileViewController : UIViewController, UITableViewDataSource, UITableVi
                     let profileImageURL = data["profileImageURL"] as! String
                     let followers = data["followers"] as! Int
                     let following = data["following"] as! Int
-                    let numberOfTrips = data["numberOfTrips"] as! Int
                     
                     self.nameLabel.text = name
                     self.hometownLabel.text = hometown
-                    self.profileImageView.sd_setImage(with: URL(string: profileImageURL), placeholderImage: UIImage(named: "atikh-bana-FtBS0p23fcc-unsplash"))
+                    self.profileImageView.sd_setImage(with: URL(string: profileImageURL), placeholderImage: UIImage(named: "defaultProfileImage"))
                     self.followersLabel.text = "\(followers)"
                     self.followingLabel.text = "\(following)"
-                    self.tripsLabel.text = "\(numberOfTrips)"
                 }
             }
         }
@@ -95,6 +95,8 @@ class ProfileViewController : UIViewController, UITableViewDataSource, UITableVi
                 print(error?.localizedDescription)
             }
             else {
+                let numberOfTrips = querySnapshot!.documents.count
+                self.tripsLabel.text = "\(numberOfTrips)"
                 for document in querySnapshot!.documents {
                     let data = document.data()
                     if(data["isCurrentTrip"] as! Bool) { continue }
@@ -137,7 +139,7 @@ class ProfileViewController : UIViewController, UITableViewDataSource, UITableVi
         let trip = trips[indexPath.row]
         cell.tripName.text = trip.name
         cell.tripUpvotes.text = "\(trip.upvotes) upvotes"
-        cell.tripImage.sd_setImage(with: URL(string: trip.tripImageURL), placeholderImage: UIImage(named: "Paris"))
+        cell.tripImage.sd_setImage(with: URL(string: trip.tripImageURL), placeholderImage: UIImage(named: "defaultTripProfileImage"))
         return cell
     }
     
