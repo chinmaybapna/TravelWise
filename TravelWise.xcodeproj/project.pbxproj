@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		05B48BE802B3563441B4501C /* Pods_TravelWise.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EAFB91075A9093C58AACD86 /* Pods_TravelWise.framework */; };
+		136FE506284510A400AEADD3 /* SelectCustomCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136FE505284510A400AEADD3 /* SelectCustomCityViewController.swift */; };
+		136FE50D2848417E00AEADD3 /* TripSuggestionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136FE50B2848417E00AEADD3 /* TripSuggestionsTableViewCell.swift */; };
+		136FE50E2848417E00AEADD3 /* TripSuggestionsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 136FE50C2848417E00AEADD3 /* TripSuggestionsTableViewCell.xib */; };
+		136FE5102848738E00AEADD3 /* CustomTripDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136FE50F2848738E00AEADD3 /* CustomTripDetailsViewController.swift */; };
+		136FE512284873CA00AEADD3 /* CustomTripCategoryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136FE511284873CA00AEADD3 /* CustomTripCategoryDetailsViewController.swift */; };
+		136FE514284873E600AEADD3 /* PlanItineraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136FE513284873E600AEADD3 /* PlanItineraryViewController.swift */; };
+		136FE5162848741000AEADD3 /* PlanDetailedDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136FE5152848741000AEADD3 /* PlanDetailedDisplayViewController.swift */; };
 		13826801267BD42B00DF183C /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13826800267BD42B00DF183C /* EditProfileViewController.swift */; };
 		13999C2C2639E9D5000FCF84 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13999C2A2639E9D5000FCF84 /* HomeTableViewCell.swift */; };
 		13999C2D2639E9D5000FCF84 /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13999C2B2639E9D5000FCF84 /* HomeTableViewCell.xib */; };
@@ -35,7 +42,6 @@
 		8267D973264D65C600CEC91A /* EditExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8267D972264D65C600CEC91A /* EditExperienceViewController.swift */; };
 		82A6913C262306B5002731C6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A6913B262306B5002731C6 /* AppDelegate.swift */; };
 		82A6913E262306B5002731C6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A6913D262306B5002731C6 /* SceneDelegate.swift */; };
-		82A69140262306B5002731C6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A6913F262306B5002731C6 /* ViewController.swift */; };
 		82A69143262306B5002731C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82A69141262306B5002731C6 /* Main.storyboard */; };
 		82A69145262306B7002731C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82A69144262306B7002731C6 /* Assets.xcassets */; };
 		82A69148262306B7002731C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82A69146262306B7002731C6 /* LaunchScreen.storyboard */; };
@@ -52,6 +58,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		136FE505284510A400AEADD3 /* SelectCustomCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCustomCityViewController.swift; sourceTree = "<group>"; };
+		136FE50B2848417E00AEADD3 /* TripSuggestionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripSuggestionsTableViewCell.swift; sourceTree = "<group>"; };
+		136FE50C2848417E00AEADD3 /* TripSuggestionsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TripSuggestionsTableViewCell.xib; sourceTree = "<group>"; };
+		136FE50F2848738E00AEADD3 /* CustomTripDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTripDetailsViewController.swift; sourceTree = "<group>"; };
+		136FE511284873CA00AEADD3 /* CustomTripCategoryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTripCategoryDetailsViewController.swift; sourceTree = "<group>"; };
+		136FE513284873E600AEADD3 /* PlanItineraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanItineraryViewController.swift; sourceTree = "<group>"; };
+		136FE5152848741000AEADD3 /* PlanDetailedDisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanDetailedDisplayViewController.swift; sourceTree = "<group>"; };
 		13826800267BD42B00DF183C /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		13999C2A2639E9D5000FCF84 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		13999C2B2639E9D5000FCF84 /* HomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
@@ -80,7 +93,6 @@
 		82A69138262306B5002731C6 /* TravelWise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelWise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82A6913B262306B5002731C6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82A6913D262306B5002731C6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		82A6913F262306B5002731C6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		82A69142262306B5002731C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		82A69144262306B7002731C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		82A69147262306B7002731C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -112,6 +124,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1371AD51269B7DDA00271D4E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				82F5E5AB264BC5210010F017 /* Table View Cells */,
+				82A69141262306B5002731C6 /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		5608446EA03750EECE31DC84 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,12 +164,11 @@
 			isa = PBXGroup;
 			children = (
 				82F5E5A9264BC4800010F017 /* Modals */,
-				82F5E5AA264BC4EC0010F017 /* Views */,
+				82F5E5AA264BC4EC0010F017 /* Controllers */,
+				1371AD51269B7DDA00271D4E /* Views */,
+				82A69144262306B7002731C6 /* Assets.xcassets */,
 				82A6913B262306B5002731C6 /* AppDelegate.swift */,
 				82A6913D262306B5002731C6 /* SceneDelegate.swift */,
-				82A6913F262306B5002731C6 /* ViewController.swift */,
-				82A69141262306B5002731C6 /* Main.storyboard */,
-				82A69144262306B7002731C6 /* Assets.xcassets */,
 				82A69146262306B7002731C6 /* LaunchScreen.storyboard */,
 				82A69149262306B7002731C6 /* Info.plist */,
 				82A691672623129D002731C6 /* GoogleService-Info.plist */,
@@ -167,10 +187,9 @@
 			path = Modals;
 			sourceTree = "<group>";
 		};
-		82F5E5AA264BC4EC0010F017 /* Views */ = {
+		82F5E5AA264BC4EC0010F017 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				82F5E5AB264BC5210010F017 /* Table View Cells */,
 				82A6915026230748002731C6 /* LoginViewController.swift */,
 				82A6916B26236676002731C6 /* RegisterViewController.swift */,
 				82A6916E26243078002731C6 /* RegistrationDetailsViewController.swift */,
@@ -189,8 +208,13 @@
 				8267D972264D65C600CEC91A /* EditExperienceViewController.swift */,
 				823315F6267AA955006A612F /* EndTripViewController.swift */,
 				13826800267BD42B00DF183C /* EditProfileViewController.swift */,
+				136FE505284510A400AEADD3 /* SelectCustomCityViewController.swift */,
+				136FE50F2848738E00AEADD3 /* CustomTripDetailsViewController.swift */,
+				136FE511284873CA00AEADD3 /* CustomTripCategoryDetailsViewController.swift */,
+				136FE513284873E600AEADD3 /* PlanItineraryViewController.swift */,
+				136FE5152848741000AEADD3 /* PlanDetailedDisplayViewController.swift */,
 			);
-			path = Views;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		82F5E5AB264BC5210010F017 /* Table View Cells */ = {
@@ -208,6 +232,8 @@
 				8225D2E426495BB800A9A7CB /* FollowersFollowingTableViewCell.xib */,
 				82F5E5A3264AC45A0010F017 /* PlaceVisitedTableViewCell.swift */,
 				82F5E5A4264AC45A0010F017 /* PlaceVisitedTableViewCell.xib */,
+				136FE50B2848417E00AEADD3 /* TripSuggestionsTableViewCell.swift */,
+				136FE50C2848417E00AEADD3 /* TripSuggestionsTableViewCell.xib */,
 			);
 			path = "Table View Cells";
 			sourceTree = "<group>";
@@ -284,6 +310,7 @@
 				8225D2E626495BB900A9A7CB /* FollowersFollowingTableViewCell.xib in Resources */,
 				13999C2D2639E9D5000FCF84 /* HomeTableViewCell.xib in Resources */,
 				82F5E5A6264AC45A0010F017 /* PlaceVisitedTableViewCell.xib in Resources */,
+				136FE50E2848417E00AEADD3 /* TripSuggestionsTableViewCell.xib in Resources */,
 				8225D2D626481DEA00A9A7CB /* ProfileTableViewCell.xib in Resources */,
 				8225D2DE26483E3600A9A7CB /* PeopleSearchTableViewCell.xib in Resources */,
 				82A691682623129D002731C6 /* GoogleService-Info.plist in Resources */,
@@ -343,15 +370,18 @@
 			files = (
 				82F5E5A5264AC45A0010F017 /* PlaceVisitedTableViewCell.swift in Sources */,
 				82F5E5A8264AE0050010F017 /* PlaceExperienceViewController.swift in Sources */,
+				136FE50D2848417E00AEADD3 /* TripSuggestionsTableViewCell.swift in Sources */,
 				8225D2EA264A59CB00A9A7CB /* PlacesVisitedViewController.swift in Sources */,
 				8225D2E226491F3000A9A7CB /* Trip.swift in Sources */,
 				13826801267BD42B00DF183C /* EditProfileViewController.swift in Sources */,
-				82A69140262306B5002731C6 /* ViewController.swift in Sources */,
+				136FE5102848738E00AEADD3 /* CustomTripDetailsViewController.swift in Sources */,
 				82DCA94E2626DCF800CD8D7F /* TripViewController.swift in Sources */,
+				136FE506284510A400AEADD3 /* SelectCustomCityViewController.swift in Sources */,
 				82A6916C26236676002731C6 /* RegisterViewController.swift in Sources */,
 				8225D2D526481DEA00A9A7CB /* ProfileTableViewCell.swift in Sources */,
 				823A743E26328FA500D22753 /* MapViewController.swift in Sources */,
 				13999C31263AAE80000FCF84 /* ProfileViewController.swift in Sources */,
+				136FE512284873CA00AEADD3 /* CustomTripCategoryDetailsViewController.swift in Sources */,
 				8225D2E526495BB800A9A7CB /* FollowersFollowingTableViewCell.swift in Sources */,
 				13C0A3AE266BD137002C6953 /* HomeTrips.swift in Sources */,
 				8225D2DD26483E3600A9A7CB /* PeopleSearchTableViewCell.swift in Sources */,
@@ -367,6 +397,8 @@
 				8225D2D8264834A600A9A7CB /* SearchViewController.swift in Sources */,
 				823A74412632916A00D22753 /* ContentViewController.swift in Sources */,
 				13999C2C2639E9D5000FCF84 /* HomeTableViewCell.swift in Sources */,
+				136FE514284873E600AEADD3 /* PlanItineraryViewController.swift in Sources */,
+				136FE5162848741000AEADD3 /* PlanDetailedDisplayViewController.swift in Sources */,
 				82A6913E262306B5002731C6 /* SceneDelegate.swift in Sources */,
 				823A74452632BE2E00D22753 /* DayTableViewCell.swift in Sources */,
 				8225D2E0264913F500A9A7CB /* SearchProfileViewController.swift in Sources */,
