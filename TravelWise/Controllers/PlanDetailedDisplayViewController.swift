@@ -37,7 +37,6 @@ class PlanDetailedDisplayViewController: UIViewController, UITableViewDelegate, 
             cell.timeofday.text = "Morning"
             cell.name.text = morningDetail!.name
             cell.price.text = "$ \(morningDetail!.price)"
-            cell.category.text = morningDetail!.category
             cell.ratingStars.rating = morningDetail!.rating
             cell.ratingStars.settings.updateOnTouch = false
             
@@ -52,7 +51,6 @@ class PlanDetailedDisplayViewController: UIViewController, UITableViewDelegate, 
             cell.timeofday.text = "Evening"
             cell.name.text = eveningDetail!.name
             cell.price.text = "$ \(eveningDetail!.price)"
-            cell.category.text = eveningDetail!.category
             cell.ratingStars.rating = eveningDetail!.rating
             cell.ratingStars.settings.updateOnTouch = false
             

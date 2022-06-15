@@ -14,7 +14,6 @@ class TripSuggestionsTableViewCell: UITableViewCell {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var timeofday: UILabel!
     @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var category: UILabel!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var ratingStars: CosmosView!
     
