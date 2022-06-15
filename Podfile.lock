@@ -212,6 +212,7 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
+  - Alamofire (5.2.2)
   - BoringSSL-GRPC (0.0.7):
     - BoringSSL-GRPC/Implementation (= 0.0.7)
     - BoringSSL-GRPC/Interface (= 0.0.7)
@@ -314,8 +315,10 @@ PODS:
   - SDWebImage (5.9.2):
     - SDWebImage/Core (= 5.9.2)
   - SDWebImage/Core (5.9.2)
+  - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
+  - Alamofire
   - Cosmos
   - Firebase/Auth
   - Firebase/Firestore
@@ -324,10 +327,12 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - RangeSeekSlider
   - SDWebImage
+  - SwiftyJSON
 
 SPEC REPOS:
   trunk:
     - abseil
+    - Alamofire
     - BoringSSL-GRPC
     - Cosmos
     - Firebase
@@ -348,9 +353,11 @@ SPEC REPOS:
     - PromisesObjC
     - RangeSeekSlider
     - SDWebImage
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
+  Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
   Firebase: c23a36d9e4cdf7877dfcba8dd0c58add66358999
@@ -371,7 +378,8 @@ SPEC CHECKSUMS:
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   RangeSeekSlider: 650b11fa1edcb92e1e0ede797669d98622570fb5
   SDWebImage: 0b42b8719ab0c5257177d5894306e8a336b21cbb
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: c6d9b55fbeac6c677e0e6ce0f96ef457aaa216ed
+PODFILE CHECKSUM: ac1f0c120588465a97d285686ba645729e476174
 
 COCOAPODS: 1.10.1

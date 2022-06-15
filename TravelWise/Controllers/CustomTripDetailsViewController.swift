@@ -13,7 +13,7 @@ class CustomTripDetailsViewController: UIViewController, RangeSeekSliderDelegate
     
     @IBOutlet weak var startDateTextField: UITextField! {
         didSet {
-            let blackPlaceholderText = NSAttributedString(string: "DD/MM/YYYY",
+            let blackPlaceholderText = NSAttributedString(string: "YYYY-MM-DD",
                                                           attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
             
             startDateTextField.attributedPlaceholder = blackPlaceholderText
@@ -21,7 +21,7 @@ class CustomTripDetailsViewController: UIViewController, RangeSeekSliderDelegate
     }
     @IBOutlet weak var endDateTextField: UITextField! {
         didSet {
-            let blackPlaceholderText = NSAttributedString(string: "DD/MM/YYYY",
+            let blackPlaceholderText = NSAttributedString(string: "YYYY-MM-DD",
                                                           attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
             
             endDateTextField.attributedPlaceholder = blackPlaceholderText
@@ -31,7 +31,7 @@ class CustomTripDetailsViewController: UIViewController, RangeSeekSliderDelegate
     @IBOutlet weak var rangeSlider: RangeSeekSlider!
     @IBOutlet weak var rangeLabel: UILabel! {
         didSet {
-            rangeLabel.text = "₹ 5000 - ₹ 50000"
+            rangeLabel.text = "$ 5 - $ 999"
         }
     }
     
@@ -76,18 +76,18 @@ class CustomTripDetailsViewController: UIViewController, RangeSeekSliderDelegate
         view.addGestureRecognizer(tapGesture)
         // Do any additional setup after loading the view.
     }
-    func rangeSeekSlider(_ slider: RangeSeekSlider, didChange minValue: CGFloat, maxValue: CGFloat)
-    {
-        rangeLabel.text = "₹ \(rangeSlider.selectedMinValue)- ₹ \(rangeSlider.selectedMaxValue)"
+    
+    func rangeSeekSlider(_ slider: RangeSeekSlider, didChange minValue: CGFloat, maxValue: CGFloat) {
+        rangeLabel.text = "$ \(rangeSlider.selectedMinValue) - $ \(rangeSlider.selectedMaxValue)"
     }
+    
     @objc func viewTapped() {
-        print("dfbjshbcjsb")
         view.endEditing(true)
     }
     
     @objc func startDateChanged(datePicker : UIDatePicker) {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         startDateTextField.text = dateFormatter.string(from: datePicker.date)
     }
     
@@ -97,18 +97,30 @@ class CustomTripDetailsViewController: UIViewController, RangeSeekSliderDelegate
     
     @objc func endDateChanged(datePicker1 : UIDatePicker) {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         endDateTextField.text = dateFormatter.string(from: datePicker1.date)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func nextButtonPressed(_ sender: Any) {
+        if(startDateTextField.text == "" || endDateTextField.text == "") {
+            let alert = UIAlertController(title: "Please choose start date and end date", message: "", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+            
+            return
+        }
+        
+        let calendar = Calendar.current
+        let fromDate = calendar.startOfDay(for: datePicker!.date)
+        let toDate = calendar.startOfDay(for: datePicker1!.date)
+        let numberOfDays = calendar.dateComponents([.day], from: fromDate, to: toDate)
+        UserDefaults.standard.setValue(startDateTextField.text, forKey: "i_start_date")
+        UserDefaults.standard.setValue(startDateTextField.text, forKey: "i_end_date")
+        UserDefaults.standard.setValue(numberOfDays.day!+1, forKey: "i_days")
+        UserDefaults.standard.setValue(rangeSlider.selectedMinValue, forKey: "i_budget_low")
+        UserDefaults.standard.setValue(rangeSlider.selectedMaxValue, forKey: "i_budget_high")
+        
+        performSegue(withIdentifier: "trip_info_given", sender: self)
     }
-    */
-
 }

@@ -111,7 +111,7 @@ class PlacesVisitedViewController: UIViewController, FloatingPanelControllerDele
                         placesVisited.append(placeVisited)
                     }
                     completion()
-                    print(placesVisited)
+//                    print(placesVisited)
                 }
             }
         }

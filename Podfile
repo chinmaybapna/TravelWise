@@ -14,4 +14,7 @@ target 'TravelWise' do
   pod 'Cosmos'
   pod 'IQKeyboardManagerSwift'
   pod 'RangeSeekSlider'
+  pod 'Alamofire'
+  pod 'SwiftyJSON'
+  
 end

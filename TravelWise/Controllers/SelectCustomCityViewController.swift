@@ -39,14 +39,18 @@ class SelectCustomCityViewController: UIViewController {
     @objc func viewTapped() {
         view.endEditing(true)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func nextButtonPressed(_ sender: Any) {
+        if(cityNameTextField.text == "") {
+            let alert = UIAlertController(title: "Please enter a province name", message: "", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+            
+            return
+        }
+        performSegue(withIdentifier: "city_entered", sender: self)
+        UserDefaults.standard.setValue(cityNameTextField.text, forKey: "i_city")
     }
-    */
-
+    
 }
